@@ -1,0 +1,478 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="description" content="Eine interaktive, offline nutzbare Arduino-Lernwerkstatt: von Blöcken zu selbst geschriebenem Code.">
+<title>Codewerkstatt · Von Blöcken zu Arduino</title>
+<style>
+:root{--ink:#182d35;--muted:#65777b;--line:#dce4e3;--paper:#f4f7f6;--white:#fff;--teal:#007f79;--mint:#dcf3eb;--nav:#142f37;--orange:#ffbc70;--blue:#2c68bb;--code:#152c35;--red:#b23e3e;--radius:17px}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,textarea,select{font:inherit}button,a,input,textarea,select{-webkit-tap-highlight-color:transparent}button{cursor:pointer}button:disabled{cursor:default;opacity:.5}a{color:var(--teal)}button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #e5a34b;outline-offset:3px}button{border:0}h1,h2,h3,p{margin-top:0}h1{font-size:clamp(27px,3vw,39px);letter-spacing:-1.4px;line-height:1.14;margin-bottom:12px}h2{font-size:20px;letter-spacing:-.45px}h3{font-size:16px}code,kbd,pre,textarea.editor{font-family:ui-monospace,SFMono-Regular,Consolas,"Liberation Mono",monospace}code{font-size:.9em}kbd{background:#e8efed;border:1px solid #cedbd7;border-radius:4px;padding:1px 5px;font-size:12px}small,.small{font-size:12px}.muted{color:var(--muted)}.eyebrow{font-size:10px;font-weight:800;letter-spacing:1.8px;text-transform:uppercase}.sr-only{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}.shell{display:grid;grid-template-columns:248px minmax(0,1fr);min-height:100vh}.sidebar{background:var(--nav);color:#d9e6e7;padding:30px 20px 22px;display:flex;flex-direction:column;position:sticky;top:0;height:100vh;overflow-y:auto}.brand{display:flex;align-items:center;gap:10px;font-size:18px;font-weight:800;letter-spacing:-.4px;color:white}.brand-mark{display:grid;place-items:center;background:#62d4b2;color:#153d3e;font:800 20px/1 ui-monospace,monospace;width:38px;height:38px;border-radius:11px}.brand-sub{font-size:11px;color:#93adb2;margin:8px 0 34px 48px}.sidebar .eyebrow{color:#88a8ac;margin:0 12px 12px}.lesson-nav{display:flex;flex-direction:column;gap:5px}.lesson-btn{width:100%;color:#abc1c4;background:transparent;border-radius:11px;padding:11px 10px;display:flex;align-items:center;gap:11px;text-align:left;transition:background .15s}.lesson-btn:hover{background:#21424b}.lesson-btn.active{background:#285058;color:#fff}.lesson-index{border:1px solid #43616a;border-radius:8px;width:28px;height:28px;display:grid;place-items:center;font-size:11px;flex-shrink:0}.active .lesson-index{background:#6bd8b8;border-color:#6bd8b8;color:#123f3a}.done .lesson-index{color:#85e7c9;border-color:#538e81}.lesson-label{font-size:12px;font-weight:650;display:block}.lesson-kind{display:block;font-size:10px;opacity:.68}.side-progress{margin-top:26px;padding:16px 12px 0;border-top:1px solid #32515b;font-size:11px;color:#a7bec2}.progress-track{height:5px;border-radius:5px;background:#34515a;margin:10px 0 8px;overflow:hidden}.progress-fill{background:#66d4b2;width:0;height:100%;transition:width .3s}.side-note{margin-top:auto;padding:24px 12px 0;color:#86a7ac;font-size:11px}.online-dot{width:6px;height:6px;border-radius:50%;background:#7be1bc;display:inline-block;margin-right:7px}.main{min-width:0}.topbar{height:72px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 36px;gap:20px;background:#fff}.crumb{font-size:12px;color:var(--muted)}.crumb strong{color:var(--ink);font-weight:600}.tabs{display:flex;gap:5px}.tab{background:transparent;padding:8px 13px;color:var(--muted);font-size:12px;border-radius:8px;font-weight:600}.tab.active{background:#e6f2ed;color:#006e67}.content{max-width:1390px;padding:30px 36px 40px;margin:0 auto}.intro{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;margin-bottom:24px}.intro p{margin-bottom:0;font-size:13px;color:var(--muted);max-width:670px}.intro .eyebrow{color:var(--teal);margin-bottom:12px}.course-badge{font-size:11px;white-space:nowrap;background:white;border:1px solid var(--line);border-radius:30px;padding:8px 13px;margin-top:12px;color:#5b7376}.task-card{background:#fff;border:1px solid var(--line);border-left:4px solid var(--teal);border-radius:var(--radius);padding:21px 24px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;margin-bottom:18px;box-shadow:0 3px 8px #183d3303}.task-label{color:var(--teal);font-size:10px;letter-spacing:1.3px;font-weight:800;margin-bottom:5px}.task-card h2{margin-bottom:5px}.task-card p{font-size:13px;margin-bottom:8px;max-width:850px}.task-meta{color:var(--muted);font-size:11px}.task-tag{align-self:start;background:#f1f5f4;border-radius:7px;padding:5px 9px;font-size:10px;color:#587372;white-space:nowrap}.workspace{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);gap:18px;align-items:stretch}.panel{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}.panel-head{padding:15px 18px;display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:1px solid var(--line);min-height:58px}.panel-title{font-size:12px;font-weight:750;display:flex;gap:8px;align-items:center}.step-chip{background:#e1f0ec;color:var(--teal);width:22px;height:22px;display:grid;place-items:center;border-radius:6px;font-size:11px}.panel-meta{font-size:10px;color:var(--muted)}.panel-body{padding:18px}.block-intro{font-size:11px;color:var(--muted);margin:0 0 13px}.bank{display:flex;flex-wrap:wrap;gap:9px;padding:14px;background:#f0f5f4;border:1px dashed #cedbd7;border-radius:10px;min-height:69px;margin-bottom:18px}.block{position:relative;background:#e4edf9;border:1px solid #bad0eb;border-left:4px solid #3c79c8;color:#22518a;border-radius:6px;padding:9px 11px;font-size:11px;font-weight:650;box-shadow:0 2px 0 #183d6810;cursor:grab}.block:before{content:"";position:absolute;top:-4px;left:15px;width:17px;height:5px;background:inherit;border:1px solid #bad0eb;border-bottom:0;border-radius:3px 3px 0 0}.block.wait{background:#fff0df;color:#8b5218;border-color:#edd2b3;border-left-color:#db9545}.block.selected{outline:3px solid #edb050;outline-offset:2px}.zone{border:1px dashed #b9cbc7;background:#fafcfb;border-radius:9px;padding:10px;min-height:75px;margin-top:6px;display:flex;flex-direction:column;align-items:flex-start;gap:7px}.zone.dragover{border-color:var(--teal);background:#e5f7ef}.zone .block{width:100%;display:flex;align-items:center;justify-content:space-between;text-align:left}.zone-label{font-size:11px;font-weight:700;color:#4e6c70;margin-top:12px;display:flex;align-items:center;gap:7px}.zone-label span{font-size:10px;font-weight:400;color:#80918f}.empty-zone{font-size:11px;color:#8a9b98;padding:10px 5px;pointer-events:none}.block-tools{display:flex;gap:3px;align-items:center}.block-tool{background:#ffffff8c;color:inherit;border-radius:4px;padding:1px 5px;font-size:11px}.inline-link{background:none;color:var(--teal);font-size:11px;padding:0;text-decoration:underline;text-underline-offset:3px}.concept-note{font-size:11px;color:#5d7479;background:#f0f6f3;border-radius:8px;padding:11px 13px;margin-top:15px}.code-panel{background:var(--code);border-color:var(--code);display:flex;flex-direction:column}.code-panel .panel-head{background:#1c3640;border-color:#31505b;color:#eaf1f2}.code-panel .panel-meta{color:#9fb7bd}.code-panel .step-chip{color:#7bdfbd;background:#2b4a4b}.code-area{position:relative;display:flex;flex:1;min-height:315px;max-height:480px;overflow:auto;background:#152c35}.code-read{padding:17px 18px;margin:0;color:#dbe9ec;font-size:12px;line-height:1.9;width:100%;white-space:pre;tab-size:2;overflow:auto}.code-line{display:block;min-height:23px;border-radius:3px}.line-num{display:inline-block;user-select:none;width:27px;color:#647f89;font-size:10px;text-align:right;padding-right:13px}.code-line.highlight{background:#2b554d}.kw{color:#88dcc4}.fn{color:#9ac9ff}.num{color:#ffca8e}.comment{color:#78949c}.code-line.error-line{background:#673e3c}.editor{resize:vertical;min-height:360px;width:100%;border:0;outline:none;background:transparent;color:#e0ebef;font-size:12px;line-height:1.8;padding:17px 20px;tab-size:2;white-space:pre;overflow:auto}.editor:focus-visible{outline:2px solid #80ceba;outline-offset:-3px}.code-foot{border-top:1px solid #2d4651;padding:11px 16px;display:flex;align-items:center;justify-content:space-between;color:#9ab2ba;font-size:10px;gap:10px}.code-foot button{background:#2a4651;color:#c9dce1;border-radius:6px;font-size:10px;padding:5px 9px}.fill-form{display:grid;gap:15px}.fill-row label{display:block;font-weight:650;font-size:12px;margin-bottom:4px}.fill-row .muted{display:block;font-weight:400;font-size:11px;margin-top:2px}.fill-input{width:100%;border:1px solid #b8ccc5;border-radius:8px;padding:9px 11px;font-family:ui-monospace,monospace;font-size:13px;color:var(--teal);background:#fafdfb}.fill-input::placeholder{color:#8a9995}.fill-row{display:grid;grid-template-columns:minmax(0,1fr) 110px;align-items:center;gap:10px}.explain{font-size:12px;color:#587176;line-height:1.75}.explain code{background:#eaf1ee;border-radius:4px;padding:2px 4px}.explain-box{border-left:3px solid #79b7a3;padding-left:13px;margin:14px 0}.actions{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:17px 0 0;flex-wrap:wrap}.action-group{display:flex;gap:8px;flex-wrap:wrap}.btn{padding:10px 15px;border-radius:9px;font-weight:650;font-size:12px;display:inline-flex;align-items:center;justify-content:center;gap:7px;line-height:1.4}.btn.primary{background:var(--teal);color:#fff;box-shadow:0 3px 4px #007f7913}.btn.primary:hover{background:#006963}.btn.secondary{background:#fff;border:1px solid #cedbd6;color:#4f696d}.btn.quiet{background:transparent;color:#637b80}.btn.next{background:#e3f2e9;color:#26765a}.feedback{padding:14px 17px;border:1px solid #dce5e1;border-radius:10px;background:#fff;margin-top:13px;font-size:12px;display:none}.feedback.visible{display:block}.feedback.good{border-color:#a1d5bc;background:#edfaf1;color:#1f6246}.feedback.bad{border-color:#e8c3b0;background:#fff7ef;color:#8d4d2f}.feedback.info{border-color:#c3d7e5;background:#f0f7fb;color:#3a6077}.feedback strong{display:block;margin-bottom:3px}.hint-box{margin-top:12px;background:#fff8e9;border:1px solid #ead8b4;border-radius:10px;padding:13px 16px;font-size:12px;color:#70572f}.hint-box p{margin:0 0 8px}.hint-count{font-size:10px;opacity:.7}.lab-row{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(260px,1fr);gap:18px;margin-top:22px}.sim-panel .panel-head{min-height:51px;padding:12px 18px}.sim-status{font-size:10px;color:#6c8585;display:flex;align-items:center;gap:6px}.sim-status i{display:block;width:6px;height:6px;border-radius:50%;background:#96aaa5}.sim-status.running i{background:#15a875;box-shadow:0 0 0 3px #ddf4e8}.sim-body{display:flex;align-items:center;justify-content:space-between;padding:21px 22px;gap:20px;background:#fbfdfb;min-height:174px}.board{width:210px;height:124px;border-radius:10px 17px 17px 10px;background:#187e86;position:relative;box-shadow:0 5px 0 #106069;flex-shrink:0;border:1px solid #116f76;color:#c7f0e7}.board:before,.board:after{content:"";position:absolute;background:repeating-linear-gradient(90deg,#a8b0a5 0,#a8b0a5 3px,#223f43 3px,#223f43 9px);height:12px;width:144px;right:13px;border:3px solid #273f42}.board:before{top:8px}.board:after{bottom:8px}.usb{position:absolute;left:-6px;top:27px;width:33px;height:32px;background:linear-gradient(90deg,#9caeae,#e7eeee);border:2px solid #90a6a5;border-radius:3px}.chip{position:absolute;bottom:38px;left:62px;width:90px;height:20px;background:#27393b;border-radius:2px;border-top:3px dashed #acc0b5;border-bottom:3px dashed #acc0b5}.board-name{position:absolute;top:37px;left:61px;font-size:19px;font-weight:800;letter-spacing:1px;line-height:1}.board-name small{display:block;font-size:7px;letter-spacing:2px;margin-top:4px;font-weight:500}.board-pin-label{position:absolute;top:24px;right:14px;font-size:6px;letter-spacing:2px;color:#c2dfda}.power-led{position:absolute;right:20px;bottom:40px;width:5px;height:5px;border-radius:50%;background:#9ef9ae;box-shadow:0 0 6px #b9ffa5}.led-cluster{display:flex;gap:20px;align-items:center}.led-unit{display:flex;flex-direction:column;align-items:center;gap:6px;font-size:9px;color:#6c8180}.led{width:25px;height:30px;border-radius:15px 15px 5px 5px;border:2px solid #a2b2ac;position:relative;background:#d6ddda;transition:background .06s,box-shadow .06s}.led:before{content:"";position:absolute;top:4px;left:5px;width:5px;height:9px;border-radius:4px;background:#ffffff88}.led:after{content:"";position:absolute;bottom:-8px;left:6px;width:9px;height:6px;border-left:2px solid #879f96;border-right:2px solid #879f96}.led.on.red{background:#fb6b5c;border-color:#ca4b43;box-shadow:0 0 17px #ff7a638c}.led.on.yellow{background:#ffcc57;border-color:#e9ad33;box-shadow:0 0 17px #ffcf6b8c}.led.on.green{background:#6bdd8b;border-color:#45ad69;box-shadow:0 0 17px #6cdd8b8c}.led-label{margin-top:7px;font-weight:650}.led-state{font-size:8px;letter-spacing:.4px}.sim-controls{display:flex;align-items:center;gap:10px;justify-content:space-between;padding:11px 18px;border-top:1px solid var(--line);flex-wrap:wrap}.switch-button{border:1px solid #c9d7d1;background:white;border-radius:6px;color:#56746d;font-size:10px;padding:5px 9px}.switch-button[aria-pressed=true]{background:#d5eee1;color:#1f7351;border-color:#71b291}.sim-time{font:10px ui-monospace,monospace;color:#66827c}.speed{font-size:10px;color:#5d7772;display:flex;gap:5px;align-items:center}.speed select{border:1px solid #c9d7d1;border-radius:4px;background:white;font-size:10px;padding:3px}.trace-body{max-height:211px;overflow:auto;padding:12px 16px;font:10px/1.9 ui-monospace,monospace;color:#65807d;min-height:159px}.trace-entry{display:grid;grid-template-columns:62px 1fr;gap:6px;border-bottom:1px solid #edf1ee;padding:2px 0}.trace-entry b{color:#327961;font-weight:600}.trace-empty{font:12px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#8a9c98;padding:12px 0}.sim-caption{font-size:10px;color:#80958f;margin:12px 0 0}.footer{font-size:10px;color:#8a9c98;display:flex;justify-content:space-between;gap:14px;margin-top:27px;border-top:1px solid var(--line);padding-top:14px}.footer button{background:transparent;color:#82968f;padding:0;font-size:10px}.page-section[hidden]{display:none}.reference-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.reference-card{padding:22px;background:white;border:1px solid var(--line);border-radius:15px}.reference-card h3{margin-bottom:8px}.reference-card p,.reference-card li{font-size:12px;color:#5c7476}.reference-card pre{font-size:11px;line-height:1.8;padding:14px;background:#eef5f1;border-radius:8px;white-space:pre-wrap;color:#2c6d60;overflow:auto}.reference-card.wide{grid-column:1/-1}.reference-card table{border-collapse:collapse;width:100%;font-size:12px}.reference-card th,.reference-card td{text-align:left;padding:10px;border-bottom:1px solid var(--line)}.reference-card th{font-weight:650;color:#385d5e}.reference-card ul{padding-left:18px}.callout{background:#e5f4eb;border:1px solid #c6e3d1;border-radius:10px;padding:14px 16px;font-size:12px;color:#356d56;margin:16px 0}.teacher-actions{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}.solution-details{border-top:1px solid var(--line);padding:15px 0}.solution-details summary{cursor:pointer;font-size:13px;font-weight:650}.solution-details pre{margin-bottom:0}.wiring{display:grid;grid-template-columns:1fr 1fr;gap:20px}.wire-diagram{background:#f4f8f5;padding:20px;border-radius:10px;font:12px/2.2 ui-monospace,monospace}.wire-arrow{color:#60a28b}.prediction{background:#f4f8f5;border-radius:10px;padding:14px;margin:14px 0}.prediction label{display:block;font-size:11px;margin-bottom:7px}.prediction input{width:100%;padding:7px;border:1px solid #c8d9d0;border-radius:6px;background:white;font-size:12px}.mobile-menu{display:none}.finish-strip{padding:12px 15px;background:#dff3e7;border-radius:10px;color:#25664b;font-size:12px;margin-top:15px}.code-line .hole{color:#ffd191;background:#735c373b;outline:1px dashed #ab8a54;border-radius:3px;padding:0 3px}.lesson-phase{display:inline-block;width:6px;height:6px;border-radius:50%;background:#77b2a2;margin-right:5px}.transfer{font-size:11px;color:#6c807a;margin:12px 0 0}.small-pills{display:flex;gap:5px;flex-wrap:wrap;margin:12px 0}.small-pills span{font-size:10px;background:#e9f2ed;padding:4px 7px;border-radius:5px;color:#527569}dialog{border:1px solid var(--line);border-radius:17px;padding:26px;max-width:430px;color:var(--ink);box-shadow:0 15px 70px #0b292a44}dialog::backdrop{background:#102c3b70}dialog h2{margin-bottom:10px}dialog p{font-size:13px;color:#627876}.dialog-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:20px}
+@media(min-width:1500px){.content{padding-top:40px}.sim-body{padding:25px 36px}}
+@media(max-width:1170px){.shell{grid-template-columns:210px minmax(0,1fr)}.sidebar{padding:25px 12px}.brand{font-size:16px}.brand-sub{margin-left:48px;font-size:9px}.content{padding:24px}.topbar{padding:0 24px}.sim-body{padding:21px 17px;gap:15px}.board{width:170px}.board:before,.board:after{width:124px}.chip{width:75px;left:53px}.board-name{left:52px}.led-cluster{gap:12px}.lab-row{grid-template-columns:1.3fr 1fr}.course-badge{display:none}}
+@media(max-width:960px){.workspace{grid-template-columns:1fr}.lab-row{grid-template-columns:1fr}.code-area{min-height:270px}.editor{min-height:350px}.reference-grid{grid-template-columns:1fr}.reference-card.wide{grid-column:auto}.sim-body{justify-content:center;gap:48px}.board{width:210px}.board:before,.board:after{width:144px}.chip{width:90px;left:62px}.board-name{left:61px}.code-read{max-height:380px}.crumb{display:none}.topbar{justify-content:flex-end}.task-card{padding:18px}.task-tag{display:none}.wiring{grid-template-columns:1fr}.trace-body{min-height:90px}}
+@media(max-width:650px){.shell{display:block}.sidebar{position:relative;height:auto;padding:16px}.brand-sub,.sidebar>.eyebrow,.side-note,.side-progress{display:none}.lesson-nav{margin-top:15px;flex-direction:row;overflow:auto;padding-bottom:4px;gap:6px}.lesson-btn{width:auto;min-width:42px;padding:7px;justify-content:center}.lesson-btn .lesson-label,.lesson-btn .lesson-kind{display:none}.lesson-index{width:27px;height:27px}.topbar{height:57px;padding:0 13px;justify-content:center}.tabs{width:100%;justify-content:center}.tab{font-size:11px;padding:7px 11px}.content{padding:22px 15px 25px}.intro{margin-bottom:20px}.intro h1{font-size:29px}.intro p{font-size:12px}.intro .eyebrow{font-size:9px}.task-card{padding:16px;gap:0}.task-card h2{font-size:18px}.panel-body{padding:15px}.panel-head{padding:13px 15px}.sim-body{gap:22px;padding:22px 14px}.board{width:160px;height:119px}.board:before,.board:after{width:112px}.board-name{left:47px;font-size:17px}.chip{left:49px;width:73px}.led-cluster{gap:12px}.led{width:22px;height:27px}.actions{align-items:flex-start}.btn{font-size:11px;padding:9px 12px}.fill-row{grid-template-columns:minmax(0,1fr) 90px}.footer{flex-wrap:wrap}.reference-card{padding:18px}.reference-card table{font-size:10px}.reference-card th,.reference-card td{padding:8px 5px}}
+@media(max-width:380px){.sim-body{flex-direction:column;gap:26px}.sim-controls{justify-content:center}.block-tools{gap:1px}}
+@media(pointer:coarse){.btn,.switch-button,.tab,.fill-input,.prediction input{min-height:44px}.block{min-height:44px}.block-tool{min-width:32px;min-height:34px}.block-main{min-height:34px}.zone-label{flex-wrap:wrap}.zone-label .inline-link{min-height:36px;padding:4px 0}.code-foot button{min-height:36px;min-width:55px}.lesson-btn{min-height:44px}.speed select{min-height:36px}.editor{font-size:16px;min-height:400px}.fill-input,.prediction input{font-size:16px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+@media print{body{font-size:11px;background:white}.sidebar,.topbar,.actions,.lab-row,.footer,.teacher-actions,.course-badge{display:none!important}.shell{display:block}.content{padding:0;max-width:none}.page-section[hidden]{display:none}.reference-grid{display:block}.reference-card{break-inside:avoid;border:0;border-bottom:1px solid #ccc;border-radius:0;padding:12px 0}.reference-card p,.reference-card li{font-size:10px}.reference-card pre{font-size:9px;background:#f4f4f4}.solution-details{display:none}.intro{margin-bottom:10px}.intro h1{font-size:24px}.callout{background:white}.wiring{grid-template-columns:1fr 1fr}.task-card{break-inside:avoid}.workspace{display:block}.code-read{color:black}.code-panel{background:#fff;border:1px solid #bbb}.code-panel .panel-head{color:black;background:white}.code-read{white-space:pre-wrap}.code-area{background:white}.editor{color:black}}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside class="sidebar" aria-label="Lernpfad">
+ <div class="brand"><span class="brand-mark" aria-hidden="true">{ }</span> Codewerkstatt</div>
+ <div class="brand-sub">VON BLÖCKEN ZU ARDUINO</div>
+ <p class="eyebrow">Dein Lernpfad</p>
+ <nav class="lesson-nav" id="lessonNav" aria-label="Übungen"></nav>
+ <div class="side-progress"><span id="progressLabel">0 von 8 geschafft</span><div class="progress-track"><div class="progress-fill" id="progressFill"></div></div><span>Ein kleiner Schritt. Dann der nächste.</span></div>
+ <div class="side-note"><span class="online-dot"></span>Auch ohne Internet bereit<br><span style="display:block;margin:7px 0 0 13px">Dein Fortschritt bleibt in diesem Browser.</span></div>
+</aside>
+<main class="main">
+ <header class="topbar"><div class="crumb">Lernlabor <span style="padding:0 9px;color:#becac7">/</span> <strong>Arduino entdecken</strong></div><nav class="tabs" aria-label="Bereiche"><button class="tab active" data-tab="workshop" aria-selected="true">Werkstatt</button><button class="tab" data-tab="reference" aria-selected="false">Spickzettel</button><button class="tab" data-tab="teacher" aria-selected="false">Für Lehrkräfte</button></nav></header>
+ <div class="content">
+ <section class="page-section" id="workshop">
+  <div class="intro"><div><div class="eyebrow">Bauen. Verstehen. Selber schreiben.</div><h1>Aus Blöcken wird Code<span style="color:var(--teal)">.</span></h1><p>Du kannst schon programmieren. Jetzt lernst du, es in Text zu übersetzen.</p></div><span class="course-badge">8 Übungen · dein Tempo</span></div>
+  <div class="task-card"><div><div class="task-label" id="taskLabel"></div><h2 id="taskTitle"></h2><p id="taskText"></p><div class="task-meta" id="taskMeta"></div></div><span class="task-tag" id="taskTag"></span></div>
+  <div class="workspace"><section class="panel" aria-labelledby="leftTitle"><div class="panel-head"><span class="panel-title"><span class="step-chip">1</span><span id="leftTitle">Baue dein Programm</span></span><span class="panel-meta" id="leftMeta">Blöcke</span></div><div class="panel-body" id="leftBody"></div></section>
+  <section class="panel code-panel" aria-labelledby="codeTitle"><div class="panel-head"><span class="panel-title"><span class="step-chip">2</span><span id="codeTitle">So sieht dein Code aus</span></span><span class="panel-meta" id="codeMode">Live-Übersetzung</span></div><div class="code-area" id="codeArea"></div><div class="code-foot"><span id="codeTip">Ein Block entspricht einer Codezeile.</span><div style="display:flex;gap:5px"><button id="copyCode">Kopieren</button><button id="downloadCode">↓ .ino</button></div></div></section></div>
+  <div class="actions"><div class="action-group"><button class="btn primary" id="runBtn">▶ Code testen</button><button class="btn secondary" id="hintBtn">◉ Tipp</button><button class="btn quiet" id="resetLesson">↶ Neu starten</button></div><div class="action-group"><button class="btn secondary" id="stopBtn" disabled>■ Stopp</button><button class="btn next" id="nextBtn">Weiter →</button></div></div>
+  <div class="feedback" id="feedback" role="status" aria-live="polite"></div><div id="hintBox" hidden class="hint-box"></div>
+  <div class="lab-row"><section class="panel sim-panel" aria-labelledby="simTitle"><div class="panel-head"><span class="panel-title" id="simTitle">Dein virtuelles Testboard</span><span class="sim-status" id="simStatus"><i></i><span>Bereit</span></span></div><div class="sim-body"><div class="board" aria-hidden="true"><div class="usb"></div><div class="board-pin-label">13 12 11 ··· 2 GND</div><div class="board-name">CODE<small>ARDUINO-LERNBOARD</small></div><div class="chip"></div><div class="power-led"></div></div><div class="led-cluster"><div class="led-unit"><div class="led red" id="led13"></div><span class="led-label">Rot · 13</span><span class="led-state" id="state13">AUS</span></div><div class="led-unit"><div class="led yellow" id="led12"></div><span class="led-label">Gelb · 12</span><span class="led-state" id="state12">AUS</span></div><div class="led-unit"><div class="led green" id="led11"></div><span class="led-label">Grün · 11</span><span class="led-state" id="state11">AUS</span></div></div></div><div class="sim-controls"><button class="switch-button" id="buttonInput" aria-pressed="false">Taster · Pin 2: losgelassen</button><span class="sim-time" id="simTime">0 ms</span><label class="speed">Tempo <select id="simSpeed" aria-label="Simulationstempo"><option value="0.5">0,5×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label></div></section>
+  <section class="panel" aria-labelledby="traceTitle"><div class="panel-head"><span class="panel-title" id="traceTitle">Was gerade passiert</span><span class="panel-meta">Programmlauf</span></div><div class="trace-body" id="traceBody" aria-live="off"><div class="trace-empty">Teste deinen Code. Hier siehst du, wann eine LED ein- oder ausgeschaltet wird.</div></div></section></div>
+  <p class="sim-caption">Vereinfachte Lernsimulation für digitale Ein- und Ausgänge. Kein vollständiger Arduino-Compiler und kein Upload auf echte Hardware. Details im Spickzettel.</p>
+ </section>
+ <section class="page-section" id="reference" hidden>
+  <div class="intro"><div><div class="eyebrow">Zum Nachschlagen</div><h1>Dein Code-Spickzettel<span style="color:var(--teal)">.</span></h1><p>Die wichtigsten Bausteine, ihre Bedeutung und die Verbindung zum echten Arduino.</p></div><button class="btn secondary printBtn">↓ Drucken / PDF</button></div>
+  <div class="reference-grid">
+   <article class="reference-card"><h3>Der Rahmen bleibt gleich</h3><pre>void setup() {
+  // Einmal beim Start ausführen.
+  pinMode(13, OUTPUT);
+}
+
+void loop() {
+  // Danach immer wieder ausführen.
+  digitalWrite(13, HIGH);
+}</pre><p><code>void</code> bedeutet: Diese Funktion gibt keinen Wert zurück. Die geschweiften Klammern <code>{ }</code> halten zusammen, was zur Funktion gehört.</p></article>
+   <article class="reference-card"><h3>Ein Block. Eine Anweisung.</h3><table><thead><tr><th>Blockidee</th><th>Textcode</th></tr></thead><tbody><tr><td>Pin als Ausgang</td><td><code>pinMode(13, OUTPUT);</code></td></tr><tr><td>LED einschalten</td><td><code>digitalWrite(13, HIGH);</code></td></tr><tr><td>LED ausschalten</td><td><code>digitalWrite(13, LOW);</code></td></tr><tr><td>Eine Sekunde warten</td><td><code>delay(1000);</code></td></tr></tbody></table><p style="margin-top:15px">Die Befehle werden von oben nach unten ausgeführt. <code>delay()</code> hält den normalen Programmablauf an. 1.000 Millisekunden sind 1 Sekunde.</p></article>
+   <article class="reference-card"><h3>Werte mit Namen</h3><pre>const int led = 13;   // bleibt gleich
+int pause = 250;       // kann sich ändern
+
+digitalWrite(led, HIGH);
+delay(pause);</pre><p><code>int</code> speichert ganze Zahlen. Ein Name ersetzt einen festen Wert und macht den Code lesbarer. Ein Name muss zuerst deklariert werden. Groß- und Kleinschreibung zählen!</p></article>
+   <article class="reference-card"><h3>Wenn … dann … sonst</h3><pre>if (digitalRead(2) == LOW) {
+  digitalWrite(13, HIGH);
+} else {
+  digitalWrite(13, LOW);
+}</pre><p><code>==</code> vergleicht zwei Werte. <code>=</code> weist einen Wert zu. Bei <code>INPUT_PULLUP</code> und einem Taster nach GND gilt: gedrückt = LOW, losgelassen = HIGH.</p></article>
+   <article class="reference-card"><h3>Eine feste Anzahl wiederholen</h3><pre>for (int i = 0; i &lt; 3; i++) {
+  digitalWrite(13, HIGH);
+  delay(250);
+  digitalWrite(13, LOW);
+  delay(250);
+}</pre><p>Start: <code>i = 0</code>. Solange <code>i &lt; 3</code> gilt, wird wiederholt. Nach jeder Runde erhöht <code>i++</code> den Zähler um 1. Es gibt drei Durchläufe: 0, 1 und 2.</p></article>
+   <article class="reference-card"><h3>Die kleine Fehler-Checkliste</h3><ul><li>Endet jede Anweisung mit einem <code>;</code>?</li><li>Passen alle <code>( )</code> und <code>{ }</code> zusammen?</li><li>Steht dort <code>digitalWrite</code> und nicht <code>digitalwrite</code>?</li><li>Sind <code>HIGH</code>, <code>LOW</code> und <code>OUTPUT</code> großgeschrieben?</li><li>Wurde der Pin in <code>setup()</code> eingerichtet?</li><li>Steht das Wiederholte in <code>loop()</code>?</li></ul><p>Eine Fehlermeldung nennt häufig die Stelle, an der der Fehler auffällt. Die Ursache kann eine Zeile davor liegen.</p></article>
+   <article class="reference-card wide"><h3>Vom Bildschirm auf den Tisch</h3><div class="wiring"><div><div class="wire-diagram">Pin 13 <span class="wire-arrow">→</span> 220–330 Ω <span class="wire-arrow">→</span> LED rot <span class="wire-arrow">→</span> GND<br>Pin 12 <span class="wire-arrow">→</span> 220–330 Ω <span class="wire-arrow">→</span> LED gelb <span class="wire-arrow">→</span> GND<br>Pin 11 <span class="wire-arrow">→</span> 220–330 Ω <span class="wire-arrow">→</span> LED grün <span class="wire-arrow">→</span> GND<br>Pin 2&nbsp; <span class="wire-arrow">→</span> Taster <span class="wire-arrow">→</span> GND</div></div><div><p>Gedacht für ein Arduino Uno mit 5-V-Logik. Jede externe LED bekommt einen eigenen Vorwiderstand. Die lange LED-Anschlussleitung (Anode) zeigt zum Widerstand; die Kathode zeigt zu GND. Vor dem Umbauen USB abziehen.</p><p>Für die ersten Blinkübungen reicht die eingebaute LED an Pin 13 (<code>LED_BUILTIN</code>) ohne externe LED. Der Taster nutzt den internen Pull-up-Widerstand; deshalb ist kein externer Tasterwiderstand nötig.</p><p><strong>Übertragen:</strong> .ino-Datei herunterladen → in der Arduino IDE öffnen → passendes Board und Port wählen → dort überprüfen und hochladen.</p></div></div></article>
+   <article class="reference-card wide"><h3>Was die Lernsimulation versteht</h3><p>Unterstützt werden <code>setup()</code>, <code>loop()</code>, ganze Zahlen und boolesche Werte, <code>const</code>, <code>pinMode()</code>, <code>digitalWrite()</code>, <code>digitalRead()</code>, <code>delay()</code>, <code>if/else</code>, <code>for</code> und einfache Rechen- und Vergleichsoperatoren. Die sichtbaren LEDs liegen an 13, 12 und 11; der Taster liegt an 2. Der Taster-Schalter hält den gedrückten Zustand, bis du ihn erneut anklickst.</p><p>Die Simulation zeigt mehrere Schleifendurchläufe bis zur Zeit- oder Schrittgrenze und hält danach an. Prüfungen betrachten das Verhalten ausgewählter Pins, keine vollständige C++-Semantik. Bibliotheken, Serial, analoge Sensoren, eigene Funktionen und echte elektrische Eigenschaften sind hier nicht abgebildet. Ein gespeicherter Haken bestätigt, dass du die Aufgabe mindestens einmal gelöst hast.</p><p>Fachliche Grundlagen: <a href="https://docs.arduino.cc/language-reference/" target="_blank" rel="noopener">offizielle Arduino-Sprachreferenz</a>, <a href="https://docs.arduino.cc/built-in-examples/basics/Blink/" target="_blank" rel="noopener">Blink-Beispiel</a> und <a href="https://docs.arduino.cc/built-in-examples/digital/InputPullupSerial/" target="_blank" rel="noopener">Taster mit INPUT_PULLUP</a>. Diese Links benötigen Internet.</p></article>
+  </div>
+ </section>
+ <section class="page-section" id="teacher" hidden>
+  <div class="intro"><div><div class="eyebrow">Für den Unterricht</div><h1>Der Übergang darf klein sein<span style="color:var(--teal)">.</span></h1><p>Ein fertiger Lernpfad mit abgestuften Hilfen, Modellhardware und Platz zum Experimentieren.</p></div></div>
+  <div class="teacher-actions"><button class="btn secondary printBtn">↓ Unterrichtshinweise drucken</button><button class="btn secondary" id="exportProgress">↓ Lernstand exportieren</button><button class="btn quiet" id="resetAll">Fortschritt zurücksetzen</button></div>
+  <div class="reference-grid"><article class="reference-card"><h3>Ein möglicher Einstieg · 2 × 45 Minuten</h3><ul><li><strong>10 Min:</strong> Vorwissen aktivieren. Was passiert beim Start? Was wiederholt sich?</li><li><strong>20 Min:</strong> Übungen 1–2 gemeinsam oder im Tandem: Blöcke legen, Code vorlesen, Wirkung vorhersagen.</li><li><strong>15 Min:</strong> Übungen 3–4: Werte verändern und begründen, warum sich das Verhalten ändert.</li><li><strong>20 Min:</strong> Übungen 5–6: Entscheidungen und Wiederholungen.</li><li><strong>15 Min:</strong> Fehlerdetektiv und eigene Mission.</li><li><strong>10 Min:</strong> Einen Sketch erklären und gegebenenfalls auf ein echtes Board übertragen.</li></ul><p>Als Auswahl nutzen: Lernende müssen nicht alle acht Übungen in einer Stunde schaffen. Die Zeitangaben sind Orientierung für Lernende mit Blockerfahrung.</p></article>
+  <article class="reference-card"><h3>Tandems & Differenzierung</h3><p><strong>Rollenwechsel:</strong> Eine Person schreibt oder schiebt, die andere erklärt jede Zeile. Nach einem Test tauschen.</p><p><strong>Unterstützung:</strong> Erst Code vorlesen, dann mit dem Spickzettel vergleichen, erst danach die gestuften Tipps öffnen. In den Blockübungen ist Klicken eine Alternative zum Ziehen.</p><p><strong>Vertiefung:</strong> Andere Pins und Zeiten wählen, eine vierte Ampelphase ergänzen oder eine eigene Blinkbotschaft entwickeln. Warum reagiert ein Taster während <code>delay()</code> verzögert?</p><p><strong>Exit-Ticket:</strong> „Was gehört in setup()? Was in loop()? Erkläre eine Zeile mit deinen eigenen Worten.“</p></article>
+  <article class="reference-card wide"><h3>Was die Lernenden selbstständig können sollen</h3><table><thead><tr><th>Schritt</th><th>Kompetenz</th><th>Sichtbares Ergebnis</th></tr></thead><tbody><tr><td>1–2 · Übersetzen</td><td>Anweisungen und Reihenfolge zuordnen</td><td>LED an; Blinken mit zwei Wartezeiten</td></tr><tr><td>3–4 · Ergänzen</td><td>Variablen verwenden, eine Abfolge lesen</td><td>250-ms-Blinken; vier Ampelphasen</td></tr><tr><td>5–6 · Strukturieren</td><td>Bedingung und Zählschleife verstehen</td><td>Taster steuert LED; dreifaches Blinken</td></tr><tr><td>7–8 · Selbst schreiben</td><td>Syntaxfehler finden und Code übertragen</td><td>Reparierter Sketch; eigener Wechselblinker</td></tr></tbody></table></article>
+  <article class="reference-card"><h3>Rückmeldung & Datenschutz</h3><p>Der Test prüft Syntax und ausgewählte Verhaltenskriterien. Ein lauffähiger Sketch kann die Aufgabe noch verfehlen. Bei der Tasterübung werden beide Zustände geprüft.</p><p>Entwürfe, Haken und Tipps bleiben lokal im Browser gespeichert, soweit dessen Einstellungen es erlauben. Es gibt keine Anmeldung, keine Analyse und keine Übertragung von Lernständen. Bei gemeinsam genutzten Geräten vor der nächsten Gruppe zurücksetzen.</p><p>Der Lernstandexport ist eine lokale Textdatei mit erledigten Aufgaben. Er ist eine Orientierung und keine automatische Benotung.</p></article>
+  <article class="reference-card"><h3>Bedienung & Einsatz</h3><p>Die HTML-Datei lässt sich direkt öffnen, kopieren und im schulischen Netzwerk verteilen. Alle Inhalte und Funktionen sind eingebettet. Schriftarten und Bibliotheken werden nicht nachgeladen.</p><p><strong>Tastatur:</strong> Mit Tab zu Blöcken und Ablageflächen wechseln, mit Enter aktivieren. In einer Ablage verschieben die Pfeil-Schaltflächen einen Block nach oben oder unten. Im Codefeld fügt Tab zwei Leerzeichen ein; mit Esc verlässt du das Feld per Tab wieder.</p><p>Die .ino-Dateien sind reguläre Sketch-Dateien für die Arduino IDE. Vor einem Hardware-Einsatz dort kompilieren und die reale Verdrahtung prüfen.</p></article>
+  <article class="reference-card wide"><h3>Lösungen zum gemeinsamen Besprechen</h3><p>Eine mögliche Lösung pro Übung. Unterschiedliche Programme können dasselbe Verhalten erzeugen. Die Lösungen sind bewusst hier gesammelt, damit die Lernansicht schrittweise bleibt.</p><div id="solutions"></div></article></div>
+ </section>
+ <footer class="footer"><span>Codewerkstatt · Lernen durch Ausprobieren · Offline-Lerndatei</span><span id="saveStatus">Lokal gespeichert, sobald du etwas änderst.</span></footer>
+ </div>
+</main>
+</div>
+<dialog id="confirmDialog"><h2 id="dialogTitle">Neu anfangen?</h2><p id="dialogText"></p><div class="dialog-actions"><button class="btn secondary" id="dialogCancel">Abbrechen</button><button class="btn primary" id="dialogConfirm">Zurücksetzen</button></div></dialog>
+<script>/* A deliberately small, deterministic Arduino teaching interpreter. No dynamic code execution. */
+(function (root) {
+  'use strict';
+  const constants = Object.freeze({ HIGH: 1, LOW: 0, OUTPUT: 'OUTPUT', INPUT: 'INPUT', INPUT_PULLUP: 'INPUT_PULLUP', LED_BUILTIN: 13, true: 1, false: 0 });
+  const signatures = { pinMode: 2, digitalWrite: 2, delay: 1, digitalRead: 1, millis: 0 };
+  function fail(message, line) { const e = new Error(message); e.line = line || 1; throw e; }
+  function tokenize(source) {
+    const tokens = []; let p = 0, line = 1;
+    while (p < source.length) {
+      const c = source[p];
+      if (/\s/.test(c)) { if (c === '\n') line++; p++; continue; }
+      if (source.slice(p, p + 2) === '//') { while (p < source.length && source[p] !== '\n') p++; continue; }
+      if (source.slice(p, p + 2) === '/*') {
+        const start = line; p += 2;
+        while (p < source.length && source.slice(p, p + 2) !== '*/') { if (source[p] === '\n') line++; p++; }
+        if (p >= source.length) fail('Der Kommentar wird nicht mit */ geschlossen.', start);
+        p += 2; continue;
+      }
+      const rest = source.slice(p); let match;
+      if ((match = rest.match(/^\d+(?:\.\d+)?/))) { tokens.push({ text: match[0], kind: 'number', line }); p += match[0].length; continue; }
+      if ((match = rest.match(/^[A-Za-z_][A-Za-z_0-9]*/))) { tokens.push({ text: match[0], kind: 'id', line }); p += match[0].length; continue; }
+      if ((match = rest.match(/^(==|!=|<=|>=|&&|\|\||\+\+|--|\+=|-=)/))) { tokens.push({ text: match[0], line }); p += match[0].length; continue; }
+      if ('{}();,+-*/%!=<>'.includes(c)) { tokens.push({ text: c, line }); p++; continue; }
+      fail('Dieses Zeichen wird hier nicht unterstützt: ' + c, line);
+    }
+    tokens.push({ text: '<Ende>', line, kind: 'eof' }); return tokens;
+  }
+  function parse(code) {
+    if (typeof code !== 'string' || code.length > 30000) fail('Der Sketch ist leer oder zu groß für die Lernsimulation.', 1);
+    const tokens = tokenize(code); let pos = 0;
+    const peek = () => tokens[pos];
+    const is = text => peek().text === text;
+    const take = () => tokens[pos++];
+    function expect(text) { if (!is(text)) fail('Erwartet wird „' + text + '“, gefunden wurde „' + peek().text + '“.', peek().line); return take(); }
+    function identifier() { const t = take(); if (t.kind !== 'id') fail('Hier wird ein Name erwartet.', t.line); return t; }
+    function isDeclaration() { return ['const', 'int', 'bool', 'long', 'unsigned'].includes(peek().text); }
+    function declaration(semicolon) {
+      const line = peek().line; let constant = false, type = '';
+      if (is('const')) { take(); constant = true; }
+      if (is('unsigned')) { take(); type = 'unsigned '; }
+      if (!['int', 'bool', 'long'].includes(peek().text)) fail('Verwende hier int, bool oder unsigned long.', peek().line);
+      type += take().text;
+      const name = identifier().text; let value = { kind: 'literal', value: 0, line };
+      if (is('=')) { take(); value = expression(); }
+      else if (constant) fail('Eine Konstante braucht beim Anlegen einen Wert.', line);
+      if (semicolon) expect(';');
+      return { kind: 'declare', name, type, constant, value, line };
+    }
+    const precedence = { '||': 1, '&&': 2, '==': 3, '!=': 3, '<': 4, '>': 4, '<=': 4, '>=': 4, '+': 5, '-': 5, '*': 6, '/': 6, '%': 6 };
+    function expression(min = 1) {
+      let left; const t = take();
+      if (t.kind === 'number') left = { kind: 'literal', value: Number(t.text), line: t.line };
+      else if (t.text === '(') { left = expression(); expect(')'); }
+      else if (['!', '-', '+'].includes(t.text)) left = { kind: 'unary', op: t.text, value: expression(7), line: t.line };
+      else if (t.kind === 'id') {
+        if (is('(')) { take(); const args = []; if (!is(')')) { do { args.push(expression()); if (!is(',')) break; take(); } while (true); } expect(')'); left = { kind: 'call', name: t.text, args, line: t.line }; }
+        else left = { kind: 'name', name: t.text, line: t.line };
+      } else fail('Hier fehlt ein Wert oder ein gültiger Ausdruck.', t.line);
+      while ((precedence[peek().text] || 0) >= min) {
+        const op = take(); const right = expression(precedence[op.text] + 1);
+        left = { kind: 'binary', op: op.text, left, right, line: op.line };
+      }
+      return left;
+    }
+    function simple(semicolon) {
+      if (isDeclaration()) return declaration(semicolon);
+      const value = expression(); let node = { kind: 'expression', value, line: value.line };
+      if (['=', '+=', '-=', '++', '--'].includes(peek().text)) {
+        const op = take(); if (value.kind !== 'name') fail('Links von einer Zuweisung muss ein Variablenname stehen.', value.line);
+        node = { kind: 'assign', name: value.name, op: op.text, value: ['++', '--'].includes(op.text) ? null : expression(), line: value.line };
+      }
+      if (semicolon) expect(';'); return node;
+    }
+    function block() { const start = expect('{'); const body = []; while (!is('}')) { if (peek().kind === 'eof') fail('Eine schließende geschweifte Klammer } fehlt.', peek().line); body.push(statement()); } expect('}'); return { kind: 'block', body, line: start.line }; }
+    function statement() {
+      const line = peek().line;
+      if (is('{')) return block();
+      if (is(';')) { take(); return { kind: 'empty', line }; }
+      if (is('if')) { take(); expect('('); const test = expression(); expect(')'); const yes = statement(); let no = null; if (is('else')) { take(); no = statement(); } return { kind: 'if', test, yes, no, line }; }
+      if (is('for')) {
+        take(); expect('('); const init = is(';') ? null : simple(false); expect(';'); const test = is(';') ? { kind: 'literal', value: 1, line } : expression(); expect(';'); const step = is(')') ? null : simple(false); expect(')'); return { kind: 'for', init, test, step, body: statement(), line };
+      }
+      if (is('while')) fail('while gehört nicht zum Umfang dieser Lernsimulation. Verwende hier eine for-Schleife.', line);
+      return simple(true);
+    }
+    const ast = { globals: [], setup: null, loop: null };
+    while (peek().kind !== 'eof') {
+      if (is('void')) {
+        take(); const name = identifier(); if (!['setup', 'loop'].includes(name.text)) fail('Die Lernsimulation unterstützt nur setup() und loop().', name.line);
+        if (ast[name.text]) fail(name.text + '() ist doppelt vorhanden.', name.line);
+        expect('('); expect(')'); ast[name.text] = block();
+      } else if (isDeclaration()) ast.globals.push(declaration(true));
+      else fail('Außerhalb von setup() und loop() stehen nur Variablen oder Konstanten.', peek().line);
+    }
+    if (!ast.setup || !ast.loop) fail('Der Sketch braucht void setup() { … } und void loop() { … }.', 1);
+    validate(ast); return ast;
+  }
+  function validate(ast) {
+    const scopes = [Object.assign(Object.create(null), Object.fromEntries(Object.keys(constants).map(name => [name, true])))];
+    function lookup(name, line) { for (let i = scopes.length - 1; i >= 0; i--) if (Object.prototype.hasOwnProperty.call(scopes[i], name)) return scopes[i][name]; fail('Der Name „' + name + '“ ist unbekannt. Prüfe Schreibweise und Groß-/Kleinschreibung.', line); }
+    function ex(node) {
+      if (node.kind === 'name') lookup(node.name, node.line);
+      else if (node.kind === 'unary') ex(node.value);
+      else if (node.kind === 'binary') { ex(node.left); ex(node.right); }
+      else if (node.kind === 'call') {
+        if (!Object.prototype.hasOwnProperty.call(signatures, node.name)) fail('Unbekannter Befehl „' + node.name + '“. Unterstützt: pinMode, digitalWrite, digitalRead, delay und millis.', node.line);
+        if (node.args.length !== signatures[node.name]) fail(node.name + '() erwartet ' + signatures[node.name] + ' Argumente.', node.line);
+        node.args.forEach(ex);
+      }
+    }
+    function st(node) {
+      if (!node) return;
+      if (node.kind === 'declare') {
+        ex(node.value); const scope = scopes[scopes.length - 1];
+        if (Object.prototype.hasOwnProperty.call(scope, node.name) || Object.prototype.hasOwnProperty.call(constants, node.name)) fail('Der Name „' + node.name + '“ ist bereits vergeben.', node.line);
+        scope[node.name] = node.constant;
+      } else if (node.kind === 'assign') { if (lookup(node.name, node.line)) fail('Die Konstante „' + node.name + '“ darf nicht verändert werden.', node.line); if (node.value) ex(node.value); }
+      else if (node.kind === 'expression') ex(node.value);
+      else if (node.kind === 'block') { scopes.push(Object.create(null)); node.body.forEach(st); scopes.pop(); }
+      else if (node.kind === 'if') { ex(node.test); st(node.yes); st(node.no); }
+      else if (node.kind === 'for') { scopes.push(Object.create(null)); st(node.init); ex(node.test); st(node.step); st(node.body); scopes.pop(); }
+    }
+    ast.globals.forEach(st); st(ast.setup); st(ast.loop);
+  }
+  function trace(code, options) {
+    const ast = typeof code === 'string' ? parse(code) : code;
+    const opts = Object.assign({ pressed: false, maxTime: 20000, maxEvents: 500, maxLoops: 8 }, options || {});
+    const maxTime = Math.max(1, Math.min(120000, Number(opts.maxTime) || 20000));
+    const maxEvents = Math.max(1, Math.min(2000, Number(opts.maxEvents) || 500));
+    const maxLoops = Math.max(1, Math.min(100, Number(opts.maxLoops) || 8));
+    let time = 0, budget = 40000; const events = [], modes = {}, warnings = []; const scopes = [Object.create(null)]; const stop = {};
+    function tick(line) { if (--budget <= 0) fail('Zu viele Schritte: Prüfe, ob deine for-Schleife endet.', line); }
+    function find(name, line) { for (let i = scopes.length - 1; i >= 0; i--) if (Object.prototype.hasOwnProperty.call(scopes[i], name)) return scopes[i][name]; fail('Unbekannte Variable „' + name + '“.', line); }
+    function value(name, line) { return Object.prototype.hasOwnProperty.call(constants, name) ? constants[name] : find(name, line).value; }
+    function number(v, line) { if (typeof v !== 'number' || !Number.isFinite(v)) fail('Hier wird eine gültige Zahl erwartet.', line); return v; }
+    function cast(v, type, line) { number(v, line); return type === 'bool' ? (v ? 1 : 0) : type.startsWith('unsigned') ? Math.max(0, Math.trunc(v)) : Math.trunc(v); }
+    function pin(v, line) { if (!Number.isInteger(v) || v < 0 || v > 13) fail('Die Simulation unterstützt digitale Pins von 0 bis 13.', line); return v; }
+    function ex(node) {
+      tick(node.line);
+      if (node.kind === 'literal') return node.value;
+      if (node.kind === 'name') return value(node.name, node.line);
+      if (node.kind === 'unary') { const v = number(ex(node.value), node.line); return node.op === '!' ? (v ? 0 : 1) : node.op === '-' ? -v : v; }
+      if (node.kind === 'binary') {
+        const a = number(ex(node.left), node.line);
+        if (node.op === '&&') return a && ex(node.right) ? 1 : 0;
+        if (node.op === '||') return a || ex(node.right) ? 1 : 0;
+        const b = number(ex(node.right), node.line);
+        switch (node.op) {
+          case '+': return a + b; case '-': return a - b; case '*': return a * b;
+          case '/': if (b === 0) fail('Durch 0 kann nicht geteilt werden.', node.line); return Math.trunc(a / b);
+          case '%': if (b === 0) fail('Modulo mit 0 ist nicht möglich.', node.line); return a % b;
+          case '==': return +(a === b); case '!=': return +(a !== b); case '<': return +(a < b); case '>': return +(a > b); case '<=': return +(a <= b); case '>=': return +(a >= b);
+        }
+      }
+      if (node.kind === 'call') {
+        const args = node.args.map(ex); const line = node.line;
+        switch (node.name) {
+          case 'pinMode': { const p = pin(args[0], line); if (!['INPUT', 'OUTPUT', 'INPUT_PULLUP'].includes(args[1])) fail('pinMode() braucht OUTPUT, INPUT oder INPUT_PULLUP.', line); modes[p] = args[1]; return 0; }
+          case 'digitalWrite': {
+            const p = pin(args[0], line); if (modes[p] !== 'OUTPUT') fail('Pin ' + p + ' muss zuerst mit pinMode(' + p + ', OUTPUT); als Ausgang eingerichtet werden.', line);
+            if (![0, 1].includes(args[1])) fail('digitalWrite() braucht HIGH oder LOW.', line);
+            events.push({ time, pin: p, value: args[1], line }); if (events.length >= maxEvents) throw stop; return 0;
+          }
+          case 'delay': { const ms = number(args[0], line); if (ms < 0) fail('Die Wartezeit darf nicht negativ sein.', line); time += Math.trunc(ms); if (time >= maxTime) { time = maxTime; throw stop; } return 0; }
+          case 'digitalRead': {
+            const p = pin(args[0], line); if (p !== 2) fail('Der virtuelle Taster ist an Pin 2 angeschlossen.', line);
+            if (!['INPUT_PULLUP', 'INPUT'].includes(modes[p])) fail('Richte Pin 2 zuerst als INPUT_PULLUP ein.', line);
+            if (modes[p] === 'INPUT' && !warnings.includes('Der virtuelle Taster verbindet Pin 2 mit GND. Verwende INPUT_PULLUP für einen definierten Ruhepegel.')) warnings.push('Der virtuelle Taster verbindet Pin 2 mit GND. Verwende INPUT_PULLUP für einen definierten Ruhepegel.');
+            return opts.pressed ? 0 : 1;
+          }
+          case 'millis': return time;
+        }
+      }
+      fail('Dieser Ausdruck wird nicht unterstützt.', node.line);
+    }
+    function st(node) {
+      if (!node) return; tick(node.line);
+      switch (node.kind) {
+        case 'empty': return;
+        case 'block': scopes.push(Object.create(null)); try { node.body.forEach(st); } finally { scopes.pop(); } return;
+        case 'declare': scopes[scopes.length - 1][node.name] = { value: cast(ex(node.value), node.type, node.line), type: node.type, constant: node.constant }; return;
+        case 'assign': { const slot = find(node.name, node.line); if (slot.constant) fail('Eine Konstante darf nicht verändert werden.', node.line); const b = node.value ? number(ex(node.value), node.line) : 1; const next = node.op === '=' ? b : ['+=', '++'].includes(node.op) ? slot.value + b : slot.value - b; slot.value = cast(next, slot.type, node.line); return; }
+        case 'expression': ex(node.value); return;
+        case 'if': if (ex(node.test)) st(node.yes); else st(node.no); return;
+        case 'for': scopes.push(Object.create(null)); try { st(node.init); while (ex(node.test)) { st(node.body); st(node.step); tick(node.line); } } finally { scopes.pop(); } return;
+      }
+    }
+    try { ast.globals.forEach(st); st(ast.setup); for (let i = 0; i < maxLoops; i++) st(ast.loop); } catch (error) { if (error !== stop) throw error; }
+    const variables = {}; Object.keys(scopes[0]).forEach(name => { variables[name] = scopes[0][name].value; });
+    return { events, modes, duration: time, variables, warnings };
+  }
+  root.ArduinoLab = Object.freeze({ parse, trace });
+})(typeof window !== 'undefined' ? window : globalThis);
+</script>
+<script>'use strict';
+const $ = id => document.getElementById(id);
+const escapeHTML = text => String(text).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const blink = (ms=500) => `void setup() {\n  pinMode(13, OUTPUT);\n}\n\nvoid loop() {\n  digitalWrite(13, HIGH);\n  delay(${ms});\n  digitalWrite(13, LOW);\n  delay(${ms});\n}`;
+const lessons = [
+ {title:'Licht an!',kind:'Blöcke entdecken',mode:'blocks',time:'5–8 Min.',concept:'setup · loop · Ausgang',task:'Richte Pin 13 als Ausgang ein und schalte die rote LED dauerhaft ein. Ziehe die beiden Blöcke in die passende Ablage. Rechts wächst dein Textcode mit.',explain:'<strong>Schon bekannt, nur anders geschrieben:</strong> Ein Block wird zu einer Anweisung. <code>setup()</code> bereitet einmal vor. <code>loop()</code> läuft danach immer wieder.',transfer:'Warum bleibt die LED an, obwohl loop() immer wieder startet?',blocks:[{id:'mode',label:'Pin 13 als Ausgang',code:'pinMode(13, OUTPUT);'},{id:'on',label:'LED an Pin 13 einschalten',code:'digitalWrite(13, HIGH);'}],hints:['Was muss einmal vorbereitet werden, bevor ein Pin etwas ausgeben kann?','Der Block „als Ausgang“ gehört in setup(). Die Schaltanweisung gehört in loop().','setup(): pinMode(13, OUTPUT);  ·  loop(): digitalWrite(13, HIGH);'],solution:'void setup() {\n  pinMode(13, OUTPUT);\n}\n\nvoid loop() {\n  digitalWrite(13, HIGH);\n}',success:'Die LED leuchtet! Einmal vorbereiten, dann schalten: Genau diese Struktur nutzt du in den nächsten Übungen.'},
+ {title:'Bring Bewegung ins Licht',nav:'Blinken verstehen',kind:'Blöcke ordnen',mode:'blocks',time:'6–10 Min.',concept:'Reihenfolge · Millisekunden',task:'Lass die rote LED abwechselnd 500 Millisekunden an und 500 Millisekunden aus sein. Die Pin-Einrichtung steht schon fest. Ordne vier Blöcke in loop().',explain:'<strong>Eine sichtbare Pause:</strong> <code>delay(500);</code> bedeutet eine halbe Sekunde warten. Zwischen Einschalten und Ausschalten braucht es eine Pause – und danach noch eine.',transfer:'Was müsstest du ändern, damit die LED nur kurz aufblitzt und lange dunkel bleibt?',fixedSetup:'pinMode(13, OUTPUT);',blocks:[{id:'off',label:'LED ausschalten',code:'digitalWrite(13, LOW);'},{id:'waitA',label:'500 ms warten',code:'delay(500);',wait:true},{id:'on',label:'LED einschalten',code:'digitalWrite(13, HIGH);'},{id:'waitB',label:'500 ms warten',code:'delay(500);',wait:true}],hints:['Vier Schritte ergeben einen Kreis: an, warten, aus, warten.','Fehlt die Pause nach dem Ausschalten, beginnt die nächste Runde sofort. Die LED wirkt dann fast dauerhaft an.','In loop(): digitalWrite(13, HIGH); → delay(500); → digitalWrite(13, LOW); → delay(500);'],solution:blink(),success:'Dein Blinkrhythmus stimmt: 500 ms an und 500 ms aus. Die zweite Wartezeit macht die Aus-Phase sichtbar.'},
+ {title:'Zahlen bekommen Namen',nav:'Werte mit Namen',kind:'Lückencode',mode:'gaps',time:'6–10 Min.',concept:'int · const · Variablen',task:'Verwende led als Namen für Pin 13. Speichere die Wartezeit in pause und lass die LED jeweils 250 Millisekunden an und aus sein. Ergänze die vier Lücken.',explain:'<strong>Ein Wert, viele Stellen:</strong> <code>const int led = 13;</code> legt eine feste Pinzahl fest. <code>int pause = 250;</code> speichert die Wartezeit. Ein Name muss überall gleich geschrieben werden.',transfer:'Ändere nach dem erfolgreichen Test nur den Zahlenwert von pause. Was passiert mit beiden Wartezeiten?',fields:[{id:'pin',label:'Die Nummer des LED-Pins',note:'Eine ganze Zahl',answer:'13'},{id:'ms',label:'Eine Viertelsekunde in ms',note:'1 Sekunde = 1.000 ms',answer:'250'},{id:'name',label:'Name in digitalWrite()',note:'Wie heißt die Pin-Konstante?',answer:'led'},{id:'delayName',label:'Name in delay()',note:'Wie heißt die Wartezeit?',answer:'pause'}],template:'const int led = {{pin}};\nint pause = {{ms}};\n\nvoid setup() {\n  pinMode(led, OUTPUT);\n}\n\nvoid loop() {\n  digitalWrite({{name}}, HIGH);\n  delay({{delayName}});\n  digitalWrite(led, LOW);\n  delay(pause);\n}',hints:['Ein Name kann eine Zahl ersetzen. Finde heraus, welche Namen oben schon vorgegeben sind.','led steht für den Pin; pause steht für die Zeit. Eine Viertelsekunde sind 250 ms.','Die vier Lücken lauten von oben nach unten: 13 · 250 · led · pause.'],success:'Du verwendest Werte über ihre Namen. Eine Änderung an pause verändert beide Wartezeiten gleichzeitig.'},
+ {title:'Deine erste Modellampel',nav:'Die Modellampel',kind:'Lückencode',mode:'gaps',time:'8–12 Min.',concept:'Zustände · mehrere Ausgänge',task:'Ergänze die vereinfachte Modellampel: 1 s Rot → 0,5 s Rot+Gelb → 1 s Grün → 0,5 s Gelb. Dann beginnt die Folge erneut. Rot: 13, Gelb: 12, Grün: 11.',explain:'<strong>Ein Zustand bleibt bestehen:</strong> Eine LED bleibt an, bis du sie ausschaltest. Bevor Grün leuchtet, müssen Rot und Gelb ausgehen. Alle drei Pins werden in <code>setup()</code> eingerichtet.',transfer:'Verlängere nach dem Lösen die Grünphase. Welche Wartezeit gehört zu ihr?',fields:[{id:'mode',label:'Pin 11 soll ausgeben',note:'Der passende Pin-Modus',answer:'OUTPUT'},{id:'yellow',label:'Gelb zu Rot hinzuschalten',note:'Ein- oder ausschalten?',answer:'HIGH'},{id:'redOff',label:'Rot vor Grün ausschalten',note:'Der passende Pegel',answer:'LOW'},{id:'greenTime',label:'Grünphase in Millisekunden',note:'Eine Sekunde',answer:'1000'}],template:'void setup() {\n  pinMode(13, OUTPUT);\n  pinMode(12, OUTPUT);\n  pinMode(11, {{mode}});\n}\n\nvoid loop() {\n  digitalWrite(12, LOW);\n  digitalWrite(11, LOW);\n  digitalWrite(13, HIGH);  // Rot\n  delay(1000);\n  digitalWrite(12, {{yellow}}); // Rot + Gelb\n  delay(500);\n  digitalWrite(13, {{redOff}});\n  digitalWrite(12, LOW);\n  digitalWrite(11, HIGH);  // Gruen\n  delay({{greenTime}});\n  digitalWrite(11, LOW);\n  digitalWrite(12, HIGH);  // Gelb\n  delay(500);\n}',hints:['Was ist ein Ausgang? Welcher Pegel schaltet eine LED ein und welcher aus?','OUTPUT richtet einen Ausgang ein. HIGH schaltet ein, LOW schaltet aus. Die Grünphase dauert 1.000 ms.','Die vier Lücken: OUTPUT · HIGH · LOW · 1000.'],success:'Alle vier Ampelphasen passen. Du steuerst jetzt mehrere Ausgänge und behältst ihren Zustand im Blick.'},
+ {title:'Der Taster entscheidet',nav:'Wenn … dann …',kind:'Code ergänzen',mode:'text',time:'8–12 Min.',concept:'digitalRead · if / else',task:'Ersetze die drei ??? im Code. Die rote LED soll nur leuchten, solange der Taster gedrückt ist. Nutze unten den Taster-Schalter zum Testen. Beide Zustände werden geprüft.',explain:'<strong>Eine Entscheidung in Text:</strong> <code>digitalRead(2)</code> liest Pin 2. Bei diesem Taster nach GND und <code>INPUT_PULLUP</code> heißt gedrückt: <code>LOW</code>. Mit <code>==</code> vergleichst du Werte.',transfer:'Vertausche nach dem Lösen HIGH und LOW in den beiden Zweigen. Wann leuchtet die LED jetzt?',starter:'void setup() {\n  pinMode(13, OUTPUT);\n  pinMode(2, INPUT_PULLUP);\n}\n\nvoid loop() {\n  if (digitalRead(2) == ???) {\n    digitalWrite(13, ???);\n  } else {\n    digitalWrite(13, ???);\n  }\n  delay(20);\n}',solution:'void setup() {\n  pinMode(13, OUTPUT);\n  pinMode(2, INPUT_PULLUP);\n}\n\nvoid loop() {\n  if (digitalRead(2) == LOW) {\n    digitalWrite(13, HIGH);\n  } else {\n    digitalWrite(13, LOW);\n  }\n  delay(20);\n}',hints:['Der Taster verbindet Pin 2 beim Drücken mit GND. Welcher Pegel bedeutet das?','Prüfe auf LOW. Im if-Zweig soll die LED an sein; im else-Zweig soll sie aus sein.','Die drei ??? werden zu LOW, HIGH und LOW. Achte auf die Großschreibung.'],success:'Beide Tasterzustände stimmen. Du kannst mit einer Bedingung auf eine Eingabe reagieren.'},
+ {title:'Drei Blitze, eine Schleife',nav:'Dreimal wiederholen',kind:'Code ergänzen',mode:'text',time:'8–12 Min.',concept:'for · Zähler · Wiederholung',task:'Ersetze die zwei ???. Eine for-Schleife soll drei Blinksignale erzeugen: je 250 ms an und aus. Danach folgen zusätzlich 1.500 ms Pause, bevor das nächste Paket beginnt.',explain:'<strong>Weniger tippen, gleiches Ergebnis:</strong> <code>for (int i = 0; i &lt; 3; i++)</code> zählt 0, 1, 2. Die Befehle zwischen den Klammern laufen dreimal. <code>loop()</code> wiederholt danach das gesamte Paket.',transfer:'Erzeuge nach dem Lösen fünf Blitze pro Paket. Welche einzige Zahl musst du dafür ändern?',starter:'void setup() {\n  pinMode(13, OUTPUT);\n}\n\nvoid loop() {\n  for (int i = 0; i < ???; i++) {\n    digitalWrite(13, HIGH);\n    delay(250);\n    digitalWrite(13, LOW);\n    delay(250);\n  }\n  delay(???);\n}',solution:'void setup() {\n  pinMode(13, OUTPUT);\n}\n\nvoid loop() {\n  for (int i = 0; i < 3; i++) {\n    digitalWrite(13, HIGH);\n    delay(250);\n    digitalWrite(13, LOW);\n    delay(250);\n  }\n  delay(1500);\n}',hints:['Bei 0 anfangen und bis vor 3 zählen ergibt drei Durchläufe.','Die lange Pause steht außerhalb der for-Klammern. Deshalb kommt sie erst nach dem ganzen Paket.','Setze 3 in die Schleifenbedingung und 1500 in die letzte delay-Anweisung.'],success:'Drei Blitze pro Paket! Du hast eine gezählte Wiederholung in eine endlose Wiederholung eingebaut.'},
+ {title:'Auf Fehlersuche',nav:'Fehlerdetektiv',kind:'Code reparieren',mode:'text',time:'8–12 Min.',concept:'Syntax · Logik · Fehlermeldungen',task:'In diesem Sketch stecken vier Fehler. Repariere sie, damit die rote LED 500 ms an und 500 ms aus ist. Behebe immer zuerst die erste Meldung und teste dann erneut.',explain:'<strong>Fehler sind Hinweise:</strong> Manche Fehler verhindern das Übersetzen, andere verändern das Verhalten. Prüfe Satzzeichen, Großschreibung, Pinrichtung und Zeitangaben.',transfer:'Baue danach absichtlich einen eigenen Fehler ein. Kann dein Lernpartner erklären, wie er sich auswirkt?',starter:'void setup() {\n  pinMode(13, INPUT);\n}\n\nvoid loop() {\n  digitalWrite(13, HIGH)\n  delay(500);\n  digitalWrite(13, low);\n  delay(5);\n}',solution:blink(),hints:['Suche zuerst das fehlende Semikolon und prüfe die Großschreibung der Pegel.','Die LED braucht OUTPUT. Ein Semikolon fehlt nach HIGH). low muss LOW heißen. Zuletzt stimmt eine Wartezeit noch nicht.','Vier Reparaturen: INPUT → OUTPUT; Semikolon nach digitalWrite(13, HIGH); low → LOW; delay(5) → delay(500).'],success:'Alle vier Fehler behoben. Du hast Schreibfehler und Verhaltensfehler systematisch aufgespürt.'},
+ {title:'Deine Mission: Wechselblinker',nav:'Selber schreiben',kind:'Eigener Sketch',mode:'text',time:'10–15 Min.',concept:'Planen · Schreiben · Testen',task:'Schreibe den Code selbst: Rot (Pin 13) und Grün (Pin 11) sollen sich alle 750 ms abwechseln. Starte mit Rot. Nie dürfen beide gleichzeitig leuchten. Nutze das leere Gerüst.',explain:'<strong>Erst der Plan, dann der Code:</strong><br>1. Beide Pins einmal als Ausgänge einrichten.<br>2. Grün aus, Rot an, 750 ms warten.<br>3. Rot aus, Grün an, 750 ms warten.<br>4. Den gesamten Ablauf wiederholen lassen.',transfer:'Bonus: Benenne Pins und Wartezeit mit Variablen. Entwickle anschließend ein eigenes Lichtsignal und erkläre es.',starter:'void setup() {\n  // Welche Pins brauchst du als Ausgang?\n\n}\n\nvoid loop() {\n  // Schreibe hier deinen Wechselblinker.\n\n}',solution:'const int rot = 13;\nconst int gruen = 11;\nint pause = 750;\n\nvoid setup() {\n  pinMode(rot, OUTPUT);\n  pinMode(gruen, OUTPUT);\n}\n\nvoid loop() {\n  digitalWrite(gruen, LOW);\n  digitalWrite(rot, HIGH);\n  delay(pause);\n  digitalWrite(rot, LOW);\n  digitalWrite(gruen, HIGH);\n  delay(pause);\n}',hints:['Was gehört nur einmal an den Anfang? Was muss danach immer wieder geschehen?','setup() braucht pinMode(13, OUTPUT); und pinMode(11, OUTPUT);. In loop() schaltest du abwechselnd eine LED aus und die andere ein.','loop(): Grün LOW → Rot HIGH → delay(750) → Rot LOW → Grün HIGH → delay(750).'],success:'Dein eigener Sketch funktioniert! Du hast den Weg von zwei Blöcken bis zum selbst geschriebenen Programm geschafft.'}
+];
+lessons.forEach(l => { if(l.mode === 'gaps') l.solution = l.template.replace(/\{\{(\w+)\}\}/g, (_,k) => l.fields.find(f=>f.id===k).answer); });
+const storageKey = 'arduino-codewerkstatt-v1';
+let storageOkay=true, saved={};
+try { saved=JSON.parse(localStorage.getItem(storageKey)||'{}'); } catch {storageOkay=false;}
+if(!saved || typeof saved!=='object' || Array.isArray(saved)) saved={};
+let current=Number.isInteger(saved.current)&&saved.current>=0&&saved.current<lessons.length?saved.current:0;
+let drafts=saved.drafts && typeof saved.drafts==='object' && !Array.isArray(saved.drafts)?saved.drafts:{};
+let completed=Array.isArray(saved.completed)?saved.completed.filter(n=>Number.isInteger(n)&&n>=0&&n<8):[];
+let selectedBlock=null, hoveredBlock=null, errorLine=null, dragging=null;
+let pressed=false, animation=0, simActive=false, simGeneration=0, latestTrace=null, lastCode=null, lineMap={};
+let escapedTab=false;
+function draft(index=current){
+ const l=lessons[index];
+ if(!drafts[index] || typeof drafts[index]!=='object' || Array.isArray(drafts[index])) drafts[index]={code:l.starter||'',fields:{},setup:[],loop:[],hints:0,prediction:''};
+ const d=drafts[index];
+ if(typeof d.code!=='string')d.code=l.starter||'';
+ if(!d.fields||typeof d.fields!=='object')d.fields={};
+ if(l.blocks){const used=new Set(); for(const zone of ['setup','loop']) { d[zone]=(Array.isArray(d[zone])?d[zone]:[]).filter(id=>{if(used.has(id)||!l.blocks.some(b=>b.id===id))return false;used.add(id);return true;}); }}
+ d.hints=Math.max(0,Math.min(3,Number(d.hints)||0));
+ return d;
+}
+function persist(){try{localStorage.setItem(storageKey,JSON.stringify({current,drafts,completed}));storageOkay=true;}catch{storageOkay=false;} $('saveStatus').textContent=storageOkay?'Dein Lernstand ist lokal gespeichert.':'Speichern ist hier nicht möglich. Lass die Datei geöffnet.';}
+function nav(){
+ $('lessonNav').innerHTML=lessons.map((l,i)=>`<button class="lesson-btn ${i===current?'active':''} ${completed.includes(i)?'done':''}" data-lesson="${i}" ${i===current?'aria-current="step"':''} aria-label="Übung ${i+1}: ${escapeHTML(l.nav||l.title)}${completed.includes(i)?', bereits gelöst':''}"><span class="lesson-index">${completed.includes(i)?'✓':String(i+1).padStart(2,'0')}</span><span><span class="lesson-label">${escapeHTML(l.nav||l.title)}</span><span class="lesson-kind">${escapeHTML(l.kind)}</span></span></button>`).join('');
+ $('progressLabel').textContent=`${new Set(completed).size} von 8 geschafft`;
+ $('progressFill').style.width=`${new Set(completed).size/8*100}%`;
+ if(window.matchMedia('(max-width:650px)').matches){const n=$('lessonNav'),b=n.querySelector('.active'),nr=n.getBoundingClientRect(),br=b.getBoundingClientRect();if(br.left<nr.left)n.scrollLeft-=nr.left-br.left;else if(br.right>nr.right)n.scrollLeft+=br.right-nr.right;}
+}
+function showTab(id){document.querySelectorAll('.page-section').forEach(s=>s.hidden=s.id!==id); document.querySelectorAll('.tab').forEach(b=>{b.classList.toggle('active',b.dataset.tab===id);b.setAttribute('aria-selected',b.dataset.tab===id?'true':'false');});if(id!=='workshop')stopSim(false);}
+function code(){
+ const l=lessons[current],d=draft(); lineMap={};
+ if(l.mode==='text')return d.code;
+ if(l.mode==='gaps')return l.template.replace(/\{\{(\w+)\}\}/g,(_,k)=>String(d.fields[k]||'???').trim());
+ let lines=['void setup() {'];
+ if(l.fixedSetup)lines.push('  '+l.fixedSetup);
+ for(const id of d.setup){lineMap[id]=lines.length+1;lines.push('  '+l.blocks.find(b=>b.id===id).code);}
+ if(!d.setup.length&&!l.fixedSetup)lines.push('  // Einmal vorbereiten');
+ lines.push('}','', 'void loop() {');
+ for(const id of d.loop){lineMap[id]=lines.length+1;lines.push('  '+l.blocks.find(b=>b.id===id).code);}
+ if(!d.loop.length)lines.push('  // Immer wieder ausfuehren');
+ lines.push('}');return lines.join('\n');
+}
+function colorLine(line){
+ const at=line.indexOf('//');const head=at>=0?line.slice(0,at):line;
+ let out='',last=0;const re=/\?\?\?|\b(?:void|const|int|bool|long|unsigned|if|else|for|HIGH|LOW|OUTPUT|INPUT_PULLUP|INPUT|LED_BUILTIN)\b|\b(?:setup|loop|digitalWrite|pinMode|delay|digitalRead|millis)\b|\b\d+\b/g;
+ for(const m of head.matchAll(re)){out+=escapeHTML(head.slice(last,m.index));const cls=m[0]==='???'?'hole':/^\d/.test(m[0])?'num':/^(setup|loop|digitalWrite|pinMode|delay|digitalRead|millis)$/.test(m[0])?'fn':'kw';out+=`<span class="${cls}">${escapeHTML(m[0])}</span>`;last=m.index+m[0].length;}
+ out+=escapeHTML(head.slice(last));if(at>=0)out+=`<span class="comment">${escapeHTML(line.slice(at))}</span>`;return out;
+}
+function renderCode(){
+ if(lessons[current].mode==='text')return;
+ const src=code(),highlight=lineMap[hoveredBlock||selectedBlock];
+ $('codeArea').innerHTML='<pre class="code-read" aria-label="Erzeugter Arduino-Code">'+src.split('\n').map((line,i)=>`<span class="code-line ${i+1===highlight?'highlight':''} ${i+1===errorLine?'error-line':''}" data-line="${i+1}"><span class="line-num" aria-hidden="true">${i+1}</span>${colorLine(line)}</span>`).join('')+'</pre>';
+}
+function blockHTML(b,zone){
+ const attrs=`data-block="${b.id}" draggable="true"`;
+ const cls=`block ${b.wait?'wait':''} ${selectedBlock===b.id?'selected':''}`;
+ if(!zone)return `<button class="${cls}" ${attrs} aria-pressed="${selectedBlock===b.id}">${escapeHTML(b.label)}</button>`;
+ const d=draft(),n=d[zone].indexOf(b.id);
+ return `<div class="${cls}" ${attrs}><button class="block-main" data-select="${b.id}" style="border:0;background:transparent;color:inherit;font:inherit;padding:0;text-align:left;flex:1" aria-label="${escapeHTML(b.label)}, Codezeile hervorheben">${escapeHTML(b.label)}</button><span class="block-tools"><button class="block-tool" data-move="-1" data-id="${b.id}" ${n===0?'disabled':''} aria-label="${escapeHTML(b.label)} nach oben">↑</button><button class="block-tool" data-move="1" data-id="${b.id}" ${n===d[zone].length-1?'disabled':''} aria-label="${escapeHTML(b.label)} nach unten">↓</button><button class="block-tool" data-remove="${b.id}" aria-label="${escapeHTML(b.label)} zurück in den Vorrat">×</button></span></div>`;
+}
+function renderBlocks(){
+ const l=lessons[current],d=draft(),used=d.setup.concat(d.loop);
+ const bank=l.blocks.filter(b=>!used.includes(b.id));
+ $('leftBody').innerHTML=`<p class="block-intro">Ziehen & ablegen. Oder: Block anklicken → „Hier ablegen“. Die Pfeile ändern die Reihenfolge.</p><div class="bank" id="blockBank">${bank.map(b=>blockHTML(b)).join('')||'<span class="small muted">Alle Blöcke sind im Programm.</span>'}</div>${['setup','loop'].map(z=>`<div class="zone-label">${z}() <span>${z==='setup'?'einmal am Anfang':'immer wieder'}</span><button class="inline-link" style="margin-left:auto" data-place="${z}" aria-label="Ausgewählten Block in ${z} ablegen">Hier ablegen</button></div><div class="zone" data-zone="${z}" aria-label="Blöcke in ${z}">${z==='setup'&&l.fixedSetup?'<span class="small muted">✓ Pin 13 ist schon als Ausgang eingerichtet.</span>':''}${d[z].map(id=>blockHTML(l.blocks.find(b=>b.id===id),z)).join('')||(!l.fixedSetup||z==='loop'?'<span class="empty-zone">Blöcke hier ablegen</span>':'')}</div>`).join('')}<div class="concept-note">${l.explain}</div>`;
+ renderCode();
+}
+function renderLeft(){
+ const l=lessons[current],d=draft();
+ if(l.mode==='blocks'){renderBlocks();return;}
+ if(l.mode==='gaps')$('leftBody').innerHTML=`<p class="block-intro">Fülle die Lücken. Dein Code rechts wird sofort ergänzt. Schreibe Arduino-Schlüsselwörter genau wie im Spickzettel.</p><div class="fill-form">${l.fields.map((f,i)=>`<div class="fill-row"><label for="gap-${f.id}">${i+1}. ${escapeHTML(f.label)}<span class="muted">${escapeHTML(f.note)}</span></label><input class="fill-input" id="gap-${f.id}" data-gap="${f.id}" value="${escapeHTML(d.fields[f.id]||'')}" placeholder="???" autocomplete="off" spellcheck="false" autocapitalize="off" autocorrect="off" maxlength="40"></div>`).join('')}</div><div class="concept-note">${l.explain}</div>`;
+ else $('leftBody').innerHTML=`<div class="explain"><div class="explain-box">${l.explain}</div><div class="small-pills">${l.concept.split(' · ').map(c=>`<span>${escapeHTML(c)}</span>`).join('')}</div><p>Du schreibst jetzt direkt im Codefeld rechts. Teste kleine Änderungen und lies die Rückmeldung.</p>${current===6?'<p><strong>Tipp zum Vorgehen:</strong> Erst Schreibfehler reparieren, dann die LED beobachten. Nicht jeder Fehler erzeugt eine Syntaxmeldung.</p>':''}</div><div class="prediction"><label for="prediction">Vor dem Test: Was wird passieren?</label><input id="prediction" value="${escapeHTML(d.prediction||'')}" placeholder="Beschreibe deine Vermutung …" maxlength="400"></div><p class="transfer"><strong>Zum Weiterdenken:</strong> ${l.transfer}</p>`;
+}
+function renderLesson(){
+ stopSim(true);selectedBlock=null;hoveredBlock=null;errorLine=null;lastCode=null;latestTrace=null;
+ const l=lessons[current],d=draft();nav();showTab('workshop');
+ $('taskLabel').textContent=`ÜBUNG ${String(current+1).padStart(2,'0')} / 08 · ${l.kind.toUpperCase()}`;
+ $('taskTitle').textContent=l.title;$('taskText').textContent=l.task;$('taskMeta').textContent=`${l.time} · ${l.concept}`;$('taskTag').textContent=current<2?'Verstehen':current<6?'Ausprobieren':'Selber machen';
+ $('leftTitle').textContent=l.mode==='blocks'?'Baue dein Programm':l.mode==='gaps'?'Ergänze die Bausteine':'Dein Schreibauftrag';
+ $('leftMeta').textContent=l.mode==='blocks'?'Verschieben & zuordnen':l.mode==='gaps'?'Vier kleine Lücken':'Denken & schreiben';
+ $('codeTitle').textContent=l.mode==='text'?'Dein Arduino-Sketch':'So sieht dein Code aus';$('codeMode').textContent=l.mode==='text'?'Direkt bearbeiten':'Live-Übersetzung';
+ $('codeTip').textContent=l.mode==='text'?'Tab: einrücken · Esc, dann Tab: Feld verlassen':l.mode==='gaps'?'Die ??? verschwinden, sobald du Werte einträgst.':'Block berühren → passende Codezeile entdecken.';
+ renderLeft();
+ if(l.mode==='text'){$('codeArea').innerHTML='<label for="editor" class="sr-only">Arduino-Code bearbeiten</label><textarea class="editor" id="editor" spellcheck="false" autocapitalize="off" autocorrect="off" autocomplete="off" aria-describedby="codeTip"></textarea>';$('editor').value=d.code;}else renderCode();
+ $('feedback').className='feedback';$('feedback').textContent='';renderHints();
+ $('nextBtn').textContent=current===7?'Zum Lernstart ↺':'Weiter →';
+ $('traceBody').innerHTML='<div class="trace-empty">Teste deinen Code. Hier siehst du, wann eine LED ein- oder ausgeschaltet wird.</div>';
+ if(completed.includes(current)) feedback('info','Schon einmal geschafft', 'Du kannst weiter experimentieren. Der Haken hält fest, dass du diese Aufgabe bereits gelöst hast.');
+}
+function dirty(){errorLine=null;stopSim(true);lastCode=null;$('feedback').className='feedback';persist();}
+function moveBlock(id,zone,before=null){
+ const d=draft();if(!lessons[current].blocks.some(b=>b.id===id))return;
+ for(const z of ['setup','loop'])d[z]=d[z].filter(b=>b!==id);
+ const at=before?d[zone].indexOf(before):-1;d[zone].splice(at<0?d[zone].length:at,0,id);selectedBlock=null;dirty();renderBlocks();
+}
+function renderHints(){const count=draft().hints;$('hintBtn').textContent=count<3?`◉ Tipp${count?' '+(count+1)+'/3':''}`:'◉ Tipps anzeigen';$('hintBox').hidden=count===0;$('hintBox').innerHTML=count?`<div class="hint-count">HILFE IN KLEINEN SCHRITTEN · ${count}/3</div>${lessons[current].hints.slice(0,count).map((h,i)=>`<p><strong>${i+1}.</strong> ${escapeHTML(h)}</p>`).join('')}`:'';}
+function feedback(type,title,body){$('feedback').className='feedback visible '+type;$('feedback').innerHTML=`<strong>${escapeHTML(title)}</strong>${escapeHTML(body)}`;}
+function stateAt(trace,time){const out={13:0,12:0,11:0};for(const e of trace.events)if(e.time<=time)out[e.pin]=e.value;return out;}
+function stateFits(trace,time,expected){const s=stateAt(trace,time);return Object.entries(expected).every(([p,v])=>s[p]===v);}
+function edges(trace,pin=13){let last=0;return trace.events.filter(e=>{if(e.pin!==pin)return false;const changed=e.value!==last;last=e.value;return changed;});}
+function rhythm(trace,on,off){const e=edges(trace);return e.length>=4&&e[0].time===0&&e.slice(0,4).every((v,i)=>v.value===(i%2?0:1)&&v.time===(i===0?0:i===1?on:i===2?on+off:2*on+off));}
+function repeatsInLoop(src){
+ const once=ArduinoLab.trace(src,{maxLoops:1,maxTime:20000}),twice=ArduinoLab.trace(src,{maxLoops:2,maxTime:20000});
+ const ledEvents=t=>t.events.filter(e=>[13,12,11].includes(e.pin)).length;
+ return twice.duration>once.duration&&ledEvents(twice)>ledEvents(once);
+}
+function validateGoal(src,trace){
+ if([1,2,3,5,6,7].includes(current)&&!repeatsInLoop(src))return {ok:false,message:'Die LED-Abfolge soll sich immer wiederholen. Schreibe die Schaltbefehle und Wartezeiten in loop(). setup() läuft nur einmal.'};
+ const plain=src.replace(/\/\*[\s\S]*?\*\//g,'').replace(/\/\/[^\n]*/g,'');
+ if(current===0){const d=draft();return {ok:trace.modes[13]==='OUTPUT'&&trace.events.some(e=>e.pin===13&&e.value===1)&&!trace.events.some(e=>e.pin===13&&e.value===0)&&d.setup.includes('mode')&&d.loop.includes('on'),message:'Richte den Pin einmal in setup() ein. Der Einschaltblock gehört in loop().'};}
+ if(current===1||current===6)return {ok:rhythm(trace,500,500),message:'Die LED soll bei 0 ms angehen, bei 500 ms ausgehen und bei 1.000 ms wieder angehen. Prüfe die Reihenfolge und beide Wartezeiten.'};
+ if(current===2)return {ok:rhythm(trace,250,250)&&/\bconst\s+int\s+led\s*=/.test(plain)&&/digitalWrite\s*\(\s*led\s*,\s*HIGH\s*\)/.test(plain)&&/delay\s*\(\s*pause\s*\)/.test(plain),message:'Nutze led als Pin-Namen und pause als Wartezeit-Namen. An- und Aus-Phase sollen jeweils 250 ms dauern.'};
+ if(current===3)return {ok:[13,12,11].every(p=>trace.modes[p]==='OUTPUT')&&stateFits(trace,0,{13:1,12:0,11:0})&&stateFits(trace,1000,{13:1,12:1,11:0})&&stateFits(trace,1500,{13:0,12:0,11:1})&&stateFits(trace,2500,{13:0,12:1,11:0})&&stateFits(trace,3000,{13:1,12:0,11:0}),message:'Prüfe alle vier Phasen: Rot (1.000 ms), Rot+Gelb (500 ms), Grün (1.000 ms), Gelb (500 ms). Schalte alte LED-Zustände gezielt aus.'};
+ if(current===4){const up=ArduinoLab.trace(src,{pressed:false}),down=ArduinoLab.trace(src,{pressed:true});return {ok:up.modes[2]==='INPUT_PULLUP'&&up.events.some(e=>e.pin===13)&&down.events.some(e=>e.pin===13)&&up.events.filter(e=>e.pin===13).every(e=>e.value===0)&&down.events.filter(e=>e.pin===13).every(e=>e.value===1)&&/\bif\s*\(/.test(plain),message:'Beide Zustände müssen passen: losgelassen = LED aus; gedrückt = LED an. Pin 2 braucht INPUT_PULLUP. Gedrückt wird als LOW gelesen.'};}
+ if(current===5){const e=edges(trace);return {ok:/\bfor\s*\(/.test(plain)&&e.length>=8&&e.slice(0,8).every((v,i)=>v.value===(i%2?0:1)&&v.time===[0,250,500,750,1000,1250,3000,3250][i]),message:'Erwartet: drei kurze Blitze mit je 250 ms an und aus. Außerhalb der for-Schleife folgen 1.500 ms Zusatzpause. Das zweite Paket beginnt bei 3.000 ms.'};}
+ if(current===7){let s={13:0,11:0},overlap=false;for(const e of trace.events){s[e.pin]=e.value;if(s[13]&&s[11])overlap=true;}return {ok:!overlap&&[13,11].every(p=>trace.modes[p]==='OUTPUT')&&[0,750,1500,2250].every((t,i)=>stateFits(trace,t,{13:i%2?0:1,11:i%2?1:0})),message:'Richte beide Pins als Ausgänge ein. Rot und Grün wechseln nach jeweils 750 ms. Schalte zuerst die bisherige LED aus, damit nie beide gleichzeitig leuchten.'};}
+ return {ok:false,message:'Prüfe deinen Ablauf noch einmal.'};
+}
+function run(){
+ const src=code();errorLine=null;stopSim(true);
+ if(src.includes('???')){feedback('bad','Es sind noch Lücken offen','Ersetze jedes ??? durch einen passenden Wert oder Namen. Die Tipps und der Spickzettel helfen dir.');return;}
+ try{const t=ArduinoLab.trace(src,{pressed,maxTime:20000,maxLoops:12});const result=validateGoal(src,t);latestTrace=t;lastCode=src;
+ if(result.ok){if(!completed.includes(current))completed.push(current);persist();nav();feedback('good','✓ Aufgabe geschafft',lessons[current].success+(current===7?' Du kannst jetzt weiter experimentieren oder deinen Sketch herunterladen.':''));}
+ else feedback('info','Der Code läuft – prüfe noch den Auftrag',result.message);
+ if(t.warnings.length){const p=document.createElement('p');p.style.margin='8px 0 0';p.textContent=t.warnings.join(' ');$('feedback').appendChild(p);}
+ startSim(t);
+ }catch(e){errorLine=e.line;feedback('bad',`Schau bei Zeile ${e.line||'…'} nach`,e.message);renderCode();if($('editor')&&e.line){const text=$('editor').value;const start=text.split('\n').slice(0,e.line-1).join('\n').length+(e.line>1?1:0);$('editor').focus();$('editor').setSelectionRange(start,text.indexOf('\n',start)<0?text.length:text.indexOf('\n',start));}}
+}
+function ledsReset(){for(const p of [13,12,11]){$('led'+p).classList.remove('on');$('state'+p).textContent='AUS';}$('simTime').textContent='0 ms';}
+function stopSim(reset=false){simGeneration++;cancelAnimationFrame(animation);simActive=false;$('stopBtn').disabled=true;$('simStatus').className='sim-status';$('simStatus').querySelector('span').textContent=reset?'Bereit':'Angehalten';if(reset)ledsReset();}
+function startSim(trace){
+ stopSim(true);const generation=simGeneration;simActive=true;$('stopBtn').disabled=false;$('simStatus').className='sim-status running';$('simStatus').querySelector('span').textContent='Simulation läuft';$('traceBody').innerHTML='';let index=0,time=0,last=performance.now();const duration=Math.max(trace.duration,trace.events.length?1000:0);const shown={13:0,12:0,11:0};
+ function frame(now){if(generation!==simGeneration)return;const rate=Number($('simSpeed').value);time=Math.min(duration,time+(now-last)*rate);last=now;$('simTime').textContent=Math.floor(time).toLocaleString('de-DE')+' ms';
+ while(index<trace.events.length&&trace.events[index].time<=time){const e=trace.events[index++];if([13,12,11].includes(e.pin)){$('led'+e.pin).classList.toggle('on',Boolean(e.value));$('state'+e.pin).textContent=e.value?'AN':'AUS';}if(shown[e.pin]!==e.value){shown[e.pin]=e.value;const row=document.createElement('div');row.className='trace-entry';row.innerHTML=`<span>${e.time.toLocaleString('de-DE')} ms</span><span>Pin ${e.pin} → <b>${e.value?'HIGH · an':'LOW · aus'}</b></span>`;$('traceBody').appendChild(row);if($('traceBody').children.length>50)$('traceBody').firstChild.remove();$('traceBody').scrollTop=$('traceBody').scrollHeight;}}
+ if(time>=duration){stopSim(false);$('simStatus').querySelector('span').textContent='Testlauf beendet';if(!$('traceBody').children.length)$('traceBody').innerHTML='<div class="trace-empty">Keine LED-Zustände verändert. Stehen die Schaltbefehle schon im Programm?</div>';return;}
+ animation=requestAnimationFrame(frame);
+ }animation=requestAnimationFrame(frame);
+}
+function download(name,text,type='text/plain;charset=utf-8'){const blob=new Blob([text],{type}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);}
+let confirmAction=null;
+function confirmReset(title,text,action){$('dialogTitle').textContent=title;$('dialogText').textContent=text;confirmAction=action;$('confirmDialog').showModal();}
+$('dialogCancel').addEventListener('click',()=>$('confirmDialog').close());
+$('dialogConfirm').addEventListener('click',()=>{$('confirmDialog').close();if(confirmAction)confirmAction();confirmAction=null;});
+document.querySelectorAll('.tab').forEach(b=>b.addEventListener('click',()=>showTab(b.dataset.tab)));
+$('lessonNav').addEventListener('click',e=>{const b=e.target.closest('[data-lesson]');if(!b)return;current=Number(b.dataset.lesson);persist();renderLesson();});
+$('leftBody').addEventListener('click',e=>{
+ const place=e.target.closest('[data-place]');if(place){if(selectedBlock)moveBlock(selectedBlock,place.dataset.place);else feedback('info','Wähle zuerst einen Block','Klicke einen Block im Vorrat an und danach auf „Hier ablegen“ bei setup() oder loop().');return;}
+ const move=e.target.closest('[data-move]');if(move){const d=draft(),id=move.dataset.id,z=d.setup.includes(id)?'setup':'loop',from=d[z].indexOf(id),to=from+Number(move.dataset.move);if(to<0||to>=d[z].length)return;[d[z][from],d[z][to]]=[d[z][to],d[z][from]];dirty();renderBlocks();document.querySelector(`[data-id="${id}"][data-move="${move.dataset.move}"]`)?.focus();return;}
+ const remove=e.target.closest('[data-remove]');if(remove){const d=draft();for(const z of ['setup','loop'])d[z]=d[z].filter(id=>id!==remove.dataset.remove);selectedBlock=null;dirty();renderBlocks();return;}
+ const b=e.target.closest('[data-block]');if(b){selectedBlock=selectedBlock===b.dataset.block?null:b.dataset.block;renderBlocks();document.querySelector(`[data-block="${b.dataset.block}"] button,button[data-block="${b.dataset.block}"]`)?.focus();}
+});
+$('leftBody').addEventListener('mouseover',e=>{const b=e.target.closest('[data-block]');if(b){hoveredBlock=b.dataset.block;renderCode();}});
+$('leftBody').addEventListener('mouseout',e=>{if(e.target.closest('[data-block]')){hoveredBlock=null;renderCode();}});
+$('leftBody').addEventListener('dragstart',e=>{const b=e.target.closest('[data-block]');if(!b)return;dragging=b.dataset.block;e.dataTransfer.setData('text/plain',dragging);e.dataTransfer.effectAllowed='move';});
+$('leftBody').addEventListener('dragover',e=>{const z=e.target.closest('[data-zone]');if(z){e.preventDefault();z.classList.add('dragover');e.dataTransfer.dropEffect='move';}});
+$('leftBody').addEventListener('dragleave',e=>{const z=e.target.closest('[data-zone]');if(z&&!z.contains(e.relatedTarget))z.classList.remove('dragover');});
+$('leftBody').addEventListener('drop',e=>{const z=e.target.closest('[data-zone]');if(!z)return;e.preventDefault();const id=e.dataTransfer.getData('text/plain')||dragging,before=e.target.closest('[data-block]')?.dataset.block;if(before===id)return;moveBlock(id,z.dataset.zone,before);dragging=null;});
+$('leftBody').addEventListener('dragend',()=>{dragging=null;document.querySelectorAll('.dragover').forEach(z=>z.classList.remove('dragover'));});
+$('leftBody').addEventListener('input',e=>{if(e.target.dataset.gap){draft().fields[e.target.dataset.gap]=e.target.value;dirty();renderCode();}if(e.target.id==='prediction'){draft().prediction=e.target.value;persist();}});
+$('codeArea').addEventListener('input',e=>{if(e.target.id==='editor'){draft().code=e.target.value;dirty();}});
+$('codeArea').addEventListener('keydown',e=>{if(e.target.id!=='editor')return;if(e.key==='Escape'){escapedTab=true;return;}if(e.key==='Tab'&&!escapedTab&&!e.shiftKey){e.preventDefault();const editor=e.target;editor.setRangeText('  ',editor.selectionStart,editor.selectionEnd,'end');draft().code=editor.value;dirty();}else if(e.key==='Tab'){escapedTab=false;}else escapedTab=false;});
+$('runBtn').addEventListener('click',run);
+$('stopBtn').addEventListener('click',()=>stopSim(false));
+$('hintBtn').addEventListener('click',()=>{draft().hints=Math.min(3,draft().hints+1);renderHints();persist();});
+$('nextBtn').addEventListener('click',()=>{current=(current+1)%lessons.length;persist();renderLesson();$('taskTitle').scrollIntoView({behavior:'auto',block:'nearest'});});
+$('resetLesson').addEventListener('click',()=>confirmReset('Diese Übung neu starten?','Der Entwurf und die geöffneten Tipps dieser Übung werden zurückgesetzt. Ein bereits verdienter Haken bleibt erhalten.',()=>{delete drafts[current];persist();renderLesson();}));
+$('resetAll').addEventListener('click',()=>confirmReset('Ganz von vorn beginnen?','Alle Entwürfe, Tipps und gelösten Aufgaben in diesem Browser werden gelöscht.',()=>{drafts={};completed=[];current=0;persist();renderLesson();}));
+$('copyCode').addEventListener('click',async()=>{const src=code();try{await navigator.clipboard.writeText(src);$('copyCode').textContent='✓ Kopiert';}catch{const t=document.createElement('textarea');t.value=src;t.style.position='fixed';t.style.top='0';document.body.appendChild(t);t.select();const ok=document.execCommand('copy');t.remove();$('copyCode').textContent=ok?'✓ Kopiert':'Bitte im Codefeld markieren';}setTimeout(()=>$('copyCode').textContent='Kopieren',2500);});
+$('downloadCode').addEventListener('click',()=>{const src=code();if(src.includes('???')){feedback('info','Vor dem Download ergänzen','Fülle zuerst alle ??? aus, damit dein Sketch keine offenen Lücken enthält.');return;}download(`Codewerkstatt_Uebung_${String(current+1).padStart(2,'0')}.ino`,src+'\n');});
+$('buttonInput').addEventListener('click',()=>{pressed=!pressed;$('buttonInput').setAttribute('aria-pressed',String(pressed));$('buttonInput').textContent=`Taster · Pin 2: ${pressed?'gedrückt · LOW':'losgelassen · HIGH'}`;if(lastCode){try{latestTrace=ArduinoLab.trace(lastCode,{pressed,maxTime:20000,maxLoops:12});startSim(latestTrace);}catch(e){feedback('bad',`Zeile ${e.line||'…'}`,e.message);}}});
+document.querySelectorAll('.printBtn').forEach(b=>b.addEventListener('click',()=>window.print()));
+$('exportProgress').addEventListener('click',()=>download('Codewerkstatt_Lernstand.txt',`CODEWERKSTATT – MEIN LERNSTAND\nExportiert: ${new Date().toLocaleString('de-DE')}\n\n${lessons.map((l,i)=>`${completed.includes(i)?'[x]':'[ ]'} ${i+1}. ${l.title}`).join('\n')}\n\n${new Set(completed).size} von 8 Aufgaben mindestens einmal gelöst.\nHaken sind keine Benotung.\n`));
+$('solutions').innerHTML=lessons.map((l,i)=>`<details class="solution-details"><summary>${i+1}. ${escapeHTML(l.title)}</summary><pre>${escapeHTML(l.solution)}</pre><p>${escapeHTML(l.transfer)}</p></details>`).join('');
+renderLesson();
+if(!storageOkay)$('saveStatus').textContent='Lokales Speichern ist hier nicht verfügbar. Lass die Datei geöffnet.';
+</script>
+</body>
+</html>
